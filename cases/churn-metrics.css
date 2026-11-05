@@ -1,0 +1,16 @@
+/* Churn metric boards: keep the numeral on the caption's centre axis.
+   Equal side tracks let the smaller unit hang to the right of that axis. */
+.case-churn :is(.metrics,.mobile-metrics) dt {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
+  align-items:baseline;
+}
+.case-churn .metric-value { grid-column:2; }
+.case-churn .metric-prefix { grid-column:1; justify-self:end; }
+.case-churn .metric-unit { grid-column:3; justify-self:start; }
+.case-churn .metric-unit[data-word-unit] { margin-left:.14em; }
+.case-churn .case-desktop .metrics { padding-inline:24px; column-gap:20px; }
+@media(max-width:600px) {
+  .case-churn .mobile-metric :is(dt,dd) { text-align:center!important; }
+  .case-churn .mobile-metric .metric-unit { font-size:40px; font-weight:500; }
+}

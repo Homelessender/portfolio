@@ -1,0 +1,62 @@
+body{background:#fff}.case-main{max-width:1440px;padding:0 var(--gutter);margin:auto}.case-block{max-width:min(100%,var(--block-width));margin-top:var(--block-gap)}.case-block p,.case-block h2,.case-block h3{font-size:var(--type-size,28px);line-height:var(--type-leading,1.43);font-weight:400;white-space:normal;overflow-wrap:break-word}.case-block .chapter{letter-spacing:-.01em}.editorial-row{display:grid;grid-template-columns:minmax(0,538fr) minmax(0,774fr);align-items:start}.section-stack{display:grid;gap:72px}.text-group{display:grid;gap:12px}.metrics{margin:0;display:grid;grid-template-columns:repeat(var(--metric-count),minmax(0,1fr));gap:36px;align-items:start;padding:45px 48px;border:1px solid #e8e6e6;border-radius:56px;box-shadow:1px 2px 2.5px #87878726,1px 14px 24px #6060600d;text-align:center}.metrics dt{font-size:64px;line-height:1.36;white-space:nowrap}.metrics dd{font-size:24px;line-height:1.5;margin:0}.product-board img{width:100%;height:auto}.product-board a{display:block;border-radius:32px}.product-board a:focus-visible{outline-offset:4px}.evidence-label{display:flex;align-items:center;gap:4px;white-space:nowrap}.evidence-label p{white-space:nowrap}.case-bottom{margin-top:100px;padding:36px 0;border-top:1px solid #e8e6e6;display:flex;justify-content:space-between;gap:32px;font-size:22px}.case-block hr{border:0;border-top:1px solid #ddd}.site-footer{font-size:20px}
+@media(max-width:1100px){.metrics{padding:32px 24px;gap:20px;border-radius:36px}.metrics dt{font-size:48px}.metrics dd{font-size:19px}.case-block p,.case-block h2,.case-block h3{font-size:min(var(--type-size),30px)}.case-block .chapter{font-size:48px}.case-block h3{font-size:38px}.editorial-row{grid-template-columns:1fr 1.6fr;gap:20px}}
+/* Interim responsive layout. Desktop illustration boards remain source exports until mobile references arrive. */
+@media(max-width:760px){.case-block{margin-top:clamp(16px,var(--block-gap),56px)}.case-block p{font-size:19px;line-height:1.5}.case-block h2,.case-block .chapter{font-size:32px;line-height:1.22}.case-block h3{font-size:27px;line-height:1.3}.editorial-row{grid-template-columns:1fr;gap:16px}.editorial-row .editorial-label{font-size:20px;line-height:1.4}.section-stack{gap:42px}.text-group{gap:14px}.metrics{grid-template-columns:1fr 1fr;gap:28px 16px;padding:28px 20px;border-radius:28px}.metrics dt{font-size:42px}.metrics dd{font-size:16px;line-height:1.4;margin-top:6px}.metrics dd br{display:revert}.product-board{margin-left:calc(-1 * var(--gutter));margin-right:calc(-1 * var(--gutter))}.product-board a{border-radius:0}.case-bottom{margin-top:64px;font-size:17px}.evidence-label img{width:32px;height:32px}.evidence-label p{font-size:18px}.case-nav{gap:18px}.case-nav a{font-size:14px}}@media(max-width:380px){.metrics{grid-template-columns:1fr}.case-bottom{flex-direction:column}.case-nav{gap:12px}}
+@media(width > 1100px){.product-board{margin-left:-24px;margin-right:-24px}}
+/* The source metrics board uses a 76px smoothed corner at 1312px width. */
+.case-desktop .metrics{border-radius:clamp(32px,5.28vw,76px)}
+
+.case-hero.case-intro-pending .case-intro-word,
+.case-hero.case-intro-pending .project-meta>p,
+.case-hero.case-intro-pending .result-summary>p,
+.case-hero.case-intro-pending .case-hero-image{opacity:0;transform:translateY(18px);filter:blur(5px)}
+.case-hero.case-intro-pending .case-intro-word{position:relative;top:18px;transform:none}
+.case-hero.case-intro-pending .case-hero-image{filter:none}
+.case-hero.case-intro-active .case-intro-word,
+.case-hero.case-intro-active .project-meta>p,
+.case-hero.case-intro-active .result-summary>p{animation:case-copy-enter var(--intro-duration,950ms) cubic-bezier(.22,.68,.24,1) var(--intro-delay,0ms) both}
+.case-hero.case-intro-active .case-intro-word{animation-name:case-word-enter}
+.case-hero.case-intro-active .case-hero-image{animation:case-image-enter 1100ms cubic-bezier(.22,.68,.24,1) 650ms both}
+@keyframes case-copy-enter{from{opacity:0;transform:translateY(18px);filter:blur(5px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+@keyframes case-word-enter{from{opacity:0;top:18px;filter:blur(5px)}to{opacity:1;top:0;filter:blur(0)}}
+@keyframes case-image-enter{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.case-hero.case-intro-pending .case-intro-word,.case-hero.case-intro-pending .project-meta>p,.case-hero.case-intro-pending .result-summary>p,.case-hero.case-intro-pending .case-hero-image{animation:none;opacity:1;transform:none;filter:none}}
+
+@media(width < 1440px){.desktop-heading-break{display:none}.case-main h1,.case-main h2,.case-main h3{text-wrap:balance}}
+/* Keep the source four-column board on desktop; compact labels before reflow. */
+@media (min-width: 1000px) and (max-width: 1279px){
+  .metrics{padding:36px 28px;gap:24px}
+  .metrics dt{font-size:52px}
+  .metrics dd{font-size:20px;line-height:1.5}
+}
+@media (min-width:761px) and (max-width:999px){
+  .metrics:has(>div:nth-child(4)){grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+/* Verified Figma desktop metric runs: Forecast539:1949 and Churn539:3020/3121/3099.
+   The separate source-authored mobile article keeps its own typography. */
+.case-desktop .metrics dt { font-weight: 500; }
+.case-desktop .metrics .metric-unit { font-size: .625em; font-weight: 800; }
+.case-desktop .metrics .metric-space { font-size: .3125em; }
+
+/* Keep decorative SVG layers inside their live shell during a resize frame. */
+.case-desktop .corner-shell > :is(.corner-shadow,.corner-stroke){width:100%;height:100%}
+
+/* Keep semantic two-line captions legible before the existing tablet reflow. */
+@media(min-width:1000px) {
+  .case-desktop .metrics dd { font-size:clamp(16px,1.6666667vw,24px); }
+}
+@media(min-width:761px) and (max-width:999px) {
+  .case-desktop .metrics:not(:has(>div:nth-child(4))) dd { font-size:16px; }
+}
+
+@media(min-width:1000px) and (max-width:1439px) {
+  .case-desktop .metrics { padding-inline:24px; column-gap:20px; }
+}
+
+/* Reveal complete lower sections with the cover, never their detached contour
+   ahead of the accepted word entrance. Keep their internal layout unchanged. */
+.case-desktop:has(.case-intro-pending)>:not(.case-hero){opacity:0}
+.case-desktop:has(.case-intro-active)>:not(.case-hero){animation:case-sections-enter 1100ms cubic-bezier(.22,.68,.24,1) 650ms both}
+@keyframes case-sections-enter{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.case-desktop:has(.case-intro-pending)>:not(.case-hero){opacity:1;animation:none}}

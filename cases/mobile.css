@@ -1,0 +1,35 @@
+/* Figma 565:5244 and 833:21622: native 390px mobile compositions. */
+.case-mobile,.mobile-case-controls{display:none}
+@media(max-width:600px){
+  .case-desktop,.site-header .case-nav{display:none}
+  .case-mobile{display:flow-root;margin-top:52px}
+  .case-main{padding:0 20px;overflow:clip}
+  .site-header{height:47px;min-height:47px;padding:20px 20px 0;gap:12px}
+  .site-header .availability{font:20px/24px 'Golos Text',Arial,sans-serif;gap:12px}
+  .site-header .availability img{width:24px;height:24px;margin:0}
+  .mobile-case-controls{display:flex;gap:12px;align-items:center;font-size:20px;font-weight:500;line-height:27px;white-space:nowrap}
+  .mobile-case-controls .locale{font-size:20px;font-weight:500;color:#989898}
+  .mobile-case-controls .locale span{color:#000}
+  .mobile-case-controls a{min-height:27px}
+  .mobile-block{display:flow-root;min-width:0}
+  .case-mobile .mobile-copy{margin:0;overflow-wrap:break-word;text-wrap:wrap;letter-spacing:0}
+  .mobile-metrics{margin:0;padding:23px;border:1px solid #f3f3f3;border-radius:36px;background:#fefefe;box-shadow:1px 2px 2.5px #87878726,1px 14px 24px #6060600d}
+  .mobile-metric dt{min-height:87px;white-space:nowrap}
+  .mobile-metric dd{margin:0}
+  .mobile-evidence-label{display:flex;align-items:flex-start;gap:8px}
+  .mobile-evidence-label img{width:24px;height:24px}
+  .case-mobile .mobile-board{margin:0}
+  .case-mobile .mobile-board a{border-radius:inherit}
+  .mobile-board img,.mobile-hero-visual img{display:block;width:100%;height:auto;border-radius:inherit}
+  .case-bottom{margin-top:52px}
+}
+@media(max-width:359px){
+  .site-header .availability{font-size:16px;gap:8px}
+  .site-header .availability img{width:20px;height:20px}
+  .mobile-case-controls,.mobile-case-controls .locale{font-size:16px}
+  .mobile-case-controls{gap:8px}
+  .mobile-copy:is(h1,h2,h3) br{display:none}
+}
+
+/* Preserve the distinct source radius even when JavaScript is unavailable. */
+[data-source-node="836:30430"] .mobile-metrics{border-radius:32px}

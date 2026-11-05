@@ -1,0 +1,139 @@
+/* Figma 539:852 / 539:3006: visible artwork is 651/658 × 501.
+   The exported images also contain shadow bleed; the stage follows the card,
+   while its unchanged bitmap scales with that stage. */
+.case-desktop .case-hero {
+  --hero-unit: min(1px, calc((100vw - 2 * var(--gutter)) / 1312));
+  display: grid;
+  grid-template-columns: minmax(0,635fr) minmax(0,658fr);
+  grid-template-rows: auto auto minmax(0,1fr) auto;
+  grid-template-areas: 'title art' 'meta art' '. art' 'result art';
+  column-gap: calc(19 * var(--hero-unit));
+  row-gap: 0;
+  min-height: 0;
+  align-items: start;
+  margin-top: 91px;
+}
+.case-desktop .case-hero:has([data-light-src$="monthly-hero.webp"]) {
+  grid-template-columns: minmax(0,635fr) minmax(0,651fr);
+  column-gap: calc(26 * var(--hero-unit));
+}
+.case-desktop .hero-copy { display: contents; }
+.case-desktop .case-hero h1 {
+  grid-area: title;
+  font-size: calc(72 * var(--hero-unit));
+  line-height: 1.1;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-wrap: wrap;
+}
+.case-desktop .case-hero .project-meta {
+  grid-area: meta;
+  display: block;
+  min-width: 0;
+  max-width: none;
+  margin-top: calc(20 * var(--hero-unit));
+}
+.case-desktop .case-hero .project-meta p {
+  font-size: calc(24 * var(--hero-unit));
+  line-height: 1.375;
+  margin: 0;
+}
+.case-desktop .case-hero .project-meta p + p { margin-top: calc(8 * var(--hero-unit)); }
+/* Balance the shared inline row so the year cannot become a lone final line
+   between the sampled viewport widths when the longer RU role just fits. */
+.case-desktop .case-hero .project-meta:has([data-node-id="539:1934"]) { text-wrap: balance; }
+.case-desktop .case-hero .project-meta p[data-node-id="539:1932"],
+.case-desktop .case-hero .project-meta p[data-node-id="539:1934"] { display: inline; }
+.case-desktop .case-hero .project-meta p[data-node-id="539:1934"] { white-space: nowrap; }
+.case-desktop .case-hero .project-meta p[data-node-id="539:1934"]::before {
+  content: '';
+  display: inline-block;
+  width: calc(6 * var(--hero-unit));
+  height: calc(6 * var(--hero-unit));
+  margin: 0 calc(12 * var(--hero-unit));
+  border-radius: 50%;
+  background: currentColor;
+  vertical-align: middle;
+  visibility: hidden;
+}
+.case-desktop .case-hero .project-meta p.meta-separated::before { visibility: visible; }
+.case-desktop .case-hero .project-meta p[data-node-id="539:1935"] { margin-top: calc(12 * var(--hero-unit)); }
+.case-desktop .case-hero .case-meta-row { column-gap: calc(20 * var(--hero-unit)); }
+.case-desktop .case-hero .case-meta-item + .case-meta-item::before { left: calc(-13 * var(--hero-unit)); }
+.case-desktop .case-hero .result-summary {
+  grid-area: result;
+  margin: 0;
+  padding-top: calc(36 * var(--hero-unit));
+  align-self: end;
+}
+.case-desktop .case-hero .result-summary p:first-child {
+  font-size: calc(24 * var(--hero-unit));
+  line-height: 1.375;
+  margin-bottom: calc(8 * var(--hero-unit));
+}
+.case-desktop .case-hero .result-summary p:nth-child(2) {
+  font-size: calc(34 * var(--hero-unit));
+  line-height: 1.44;
+  text-wrap: balance;
+  text-wrap: pretty;
+}
+.case-desktop .case-hero .result-context {
+  font-size: calc(20 * var(--hero-unit));
+  line-height: 1.5;
+  margin-top: calc(10 * var(--hero-unit));
+}
+.case-desktop .case-hero-art {
+  grid-area: art;
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  aspect-ratio: 658 / 501;
+  margin: 0;
+  align-self: start;
+}
+.case-desktop .case-hero-art:has([data-light-src$="monthly-hero.webp"]) { aspect-ratio: 651 / 501; }
+.case-desktop .case-hero-art .case-hero-image {
+  position: absolute;
+  top: calc(-100% * 10.5 / 501);
+  left: calc(-100% * 23.5 / 658);
+  width: calc(100% * 707 / 658);
+  max-width: none;
+  height: auto;
+  margin: 0;
+  border-radius: 0;
+  object-fit: contain;
+}
+.case-desktop .case-hero-art .case-hero-image[data-light-src$="monthly-hero.webp"] {
+  width: calc(100% * 700 / 651);
+  left: calc(-100% * 23.5 / 651);
+}
+/* Below this width Churn's secondary text would fall below 16px if scaled.
+   Change the flow instead of keeping an increasingly cramped two-column hero.
+   The separate, source-authored mobile article still owns widths <= 600px. */
+@media (max-width:1151px) {
+  .case-desktop .case-hero,
+  .case-desktop .case-hero:has([data-light-src$="monthly-hero.webp"]) {
+    --hero-unit: 1px;
+    grid-template-columns: minmax(0,1fr);
+    grid-template-rows: auto;
+    grid-template-areas: 'title' 'meta' 'art' 'result';
+    gap: 0;
+    margin-top: 52px;
+  }
+  .case-desktop .case-hero h1 { font-size: clamp(40px,4.9vw,56px); line-height: 1.16; }
+  .case-desktop .case-hero .project-meta { margin-top: 24px; }
+  .case-desktop .case-hero .project-meta p,
+  .case-desktop .case-hero:has([data-light-src$="churn-hero.webp"]) .project-meta p { font-size: 18px; line-height: 1.5; }
+  .case-desktop .case-hero-art { max-width: 760px; margin-top: 28px; }
+  .case-desktop .case-hero .result-summary { margin-top: 28px; padding-top: 0; }
+  .case-desktop .case-hero .result-summary p:first-child { font-size: 20px; }
+  .case-desktop .case-hero .result-summary p:nth-child(2) { font-size: clamp(26px,3vw,34px); }
+  .case-desktop .case-hero .result-context { font-size: 18px; }
+}
+
+/* Churn539:3006 source: metadata583px/24px,16px row gaps; result ends at artwork. */
+@media (min-width:1152px) {
+  .case-desktop .case-hero:has([data-light-src$="churn-hero.webp"]) h1 { position: relative; top: calc(4 * var(--hero-unit)); }
+  .case-desktop .case-hero:has([data-light-src$="churn-hero.webp"]) .project-meta { max-width: calc(583 * var(--hero-unit)); }
+  .case-desktop .case-hero:has([data-light-src$="churn-hero.webp"]) .project-meta p + p { margin-top: calc(16 * var(--hero-unit)); }
+}
