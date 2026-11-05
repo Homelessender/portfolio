@@ -1,0 +1,51 @@
+/* Adaptive cards reuse the existing assets and type; one flow owns all gaps. */
+@media(max-width:1100px){
+  .forecast-card,.churn-card{display:flex;flex-direction:column;height:auto;min-height:650px}
+  .forecast-card p,.churn-card p{max-width:none}
+  .forecast-card>.card-link,.churn-card>.card-link{position:static;display:block;margin-top:28px;flex-shrink:0}
+  .forecast-card>.card-link::after,.churn-card>.card-link::after{content:'';position:absolute;inset:0;border-radius:inherit}
+  .forecast-card .text-link,.churn-card .text-link{position:static}
+  .forecast-card>.case-art-stage,.churn-card>.case-art-stage{display:grid;place-items:center;position:relative;inset:auto;flex:1;min-height:280px;margin:24px 0;overflow:hidden;pointer-events:none}
+  .forecast-card>.case-art-stage>.forecast-phone{left:50%;right:auto;top:0;bottom:auto;width:230px;height:auto;transform:translateX(-59.57%);mask-image:linear-gradient(to bottom,#000 64%,rgba(0,0,0,.88) 77%,rgba(0,0,0,.3) 91%,transparent 100%)}
+  .forecast-card .case-tags,.churn-card .case-tags{position:relative;inset:auto;max-width:none;margin:0;line-height:1.6;flex-shrink:0}
+  .forecast-card .case-tags .metadata-row span{white-space:nowrap}
+  .churn-expanded svg,.churn-expanded img{width:min(320px,100%)}
+  .auto-card{padding-bottom:28px}
+  .auto-card .auto-art{position:relative;inset:auto;width:min(282.42px,100%);height:auto;aspect-ratio:282.42/247.5;margin:24px auto;order:1;flex-shrink:0}
+  .auto-card .progress-label{position:static;margin-top:auto;order:2;min-height:44px;display:flex;align-items:center}
+}
+/* Two primary cards in the same row retain equal outer height. */
+@media(width > 700px) and (max-width:1100px){
+  .forecast-card,.churn-card{min-height:700px}
+}
+/* At this width the two-column About leaves a 250px text measure. Reuse its
+   existing one-column arrangement before the text becomes a narrow strip. */
+@media(width > 600px) and (max-width:760px){
+  .about-grid{grid-template-columns:1fr;gap:36px}
+  .photo-stack{width:min(88.5%,400px)}
+}
+
+/* Align the actual translated heading and description rows when cards sit next
+   to one another. Content-sized rows avoid hard-coded blank text reserves. */
+@supports(grid-template-rows:subgrid){
+ @media(width > 700px) and (max-width:1100px){
+  .work-grid>.corner-shell:has(>.forecast-card),.work-grid>.corner-shell:has(>.churn-card){grid-row:span 5;grid-template-rows:subgrid;row-gap:0}
+  .forecast-card,.churn-card{display:grid;grid-row:span 5;grid-template-rows:subgrid;row-gap:0}
+ }
+}
+/* Contact light remains behind the About content as it reaches upward. */
+.portfolio-home .about-inner{position:relative;z-index:5}
+
+/* In the paired tablet layout, centre both decorative fields on the artwork
+   row. The SVG Churn field includes its own blur and needs a smaller envelope
+   and lower colour strength than the flat lavender Forecast ellipse. */
+@media(width > 700px) and (max-width:1100px){
+ .forecast-card::before,.churn-card>.churn-glow{left:50%;top:66%;transform:translate(-50%,-50%)}
+ .churn-card>.churn-glow{width:600px}
+ :root:not([data-theme=dark]) .forecast-card{--card-field-peak:1}
+ :root:not([data-theme=dark]) .churn-card{--card-field-peak:.55}
+ @supports(grid-template-rows:subgrid){
+  .forecast-card::before,.churn-card>.churn-glow{grid-row:4 / 5;grid-column:1 / -1;top:50%}
+  .forecast-card::before{width:calc(90% + 50px)}
+ }
+}

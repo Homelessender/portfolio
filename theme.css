@@ -1,0 +1,102 @@
+/* Layout stays shared. Semantic colors come from Theme Light / Theme Dark. */
+/* One page-wide dissolve also blends gradients, raster assets and canvas light. */
+.theme-transition::view-transition{pointer-events:none}
+.theme-transition::view-transition-group(root){animation-duration:650ms;animation-timing-function:cubic-bezier(.4,0,.2,1)}
+.theme-transition::view-transition-old(root){animation:theme-dissolve 650ms cubic-bezier(.4,0,.2,1) both;mix-blend-mode:normal;z-index:2}
+.theme-transition::view-transition-new(root){animation:none;mix-blend-mode:normal;z-index:1}
+@keyframes theme-dissolve{from{opacity:1}to{opacity:0}}
+@media(prefers-reduced-motion:reduce){
+  .theme-transition::view-transition-group(root),.theme-transition::view-transition-old(root){animation-duration:0s}
+}
+.theme-toggle{position:relative;display:inline-grid;place-items:center;flex:0 0 44px;width:44px;height:44px;margin:-10px;padding:10px;border:0;border-radius:50%;background:transparent;cursor:pointer}
+.theme-toggle .theme-orb{display:block;width:24px;height:24px;max-width:none}
+.theme-icons{position:relative;display:block;width:24px;height:24px}
+.theme-toggle .theme-orb{position:absolute;inset:0;transition:opacity 420ms ease,transform 550ms cubic-bezier(.22,1,.36,1)}
+/* The source image includes transparent padding. Keep its original 40px scale
+   inside the 24px anchor, with all rays visible beyond the old clipped frame. */
+.theme-toggle .theme-orb.theme-sun{inset:auto;left:-33.333333%;top:-33.333333%;width:166.666667%;height:166.666667%}
+.theme-icons,.theme-toggle{overflow:visible}
+.theme-transition .theme-toggle .theme-orb{transition:none}
+.theme-moon{opacity:1;transform:rotate(0) scale(1)}
+.theme-sun{opacity:0;transform:rotate(-30deg) scale(.8)}
+:root[data-theme="dark"] .theme-moon{opacity:0;transform:rotate(25deg) scale(.8)}
+:root[data-theme="dark"] .theme-sun{opacity:1;transform:rotate(0) scale(1)}
+.theme-hint{display:grid;position:absolute;right:calc(100% + 2px);top:50%;white-space:nowrap;font:500 20px/1.35 Manrope,Arial,sans-serif;color:currentColor;opacity:0;transform:translate(12px,-50%);pointer-events:none;transition:opacity 260ms ease,transform 320ms cubic-bezier(.22,1,.36,1)}
+.theme-hint>span{grid-area:1/1;justify-self:end;transition:opacity 450ms cubic-bezier(.4,0,.2,1)}
+.theme-hint-to-dark{opacity:1}
+.theme-hint-to-light{opacity:0}
+:root[data-theme="dark"] .theme-hint-to-dark{opacity:0}
+:root[data-theme="dark"] .theme-hint-to-light{opacity:1}
+.theme-transition .theme-hint>span{transition:none}
+.theme-toggle.theme-hint-held .theme-hint{opacity:.4;transform:translate(0,-50%)}
+.theme-toggle:focus-visible{outline:none}
+.theme-toggle:focus-visible .theme-hint{opacity:.4;transform:translate(0,-50%)}
+@media(hover:hover) and (pointer:fine){.theme-toggle:hover .theme-hint{opacity:.4;transform:translate(0,-50%)}}
+@media(max-width:760px){
+ .theme-icons{width:18px;height:18px}
+ .theme-hint{top:calc(100% + 8px);right:0;font-size:12px;padding:5px 8px;border-radius:6px;background:var(--color-bg-page,#fff);transform:translateY(-5px)}
+ .theme-toggle.theme-hint-held .theme-hint,.theme-toggle:focus-visible .theme-hint{opacity:1;transform:translateY(0)}
+}
+@media(max-width:760px) and (hover:hover) and (pointer:fine){.theme-toggle:hover .theme-hint{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.theme-toggle .theme-orb,.theme-hint,.theme-hint>span{transition:none}}
+.case-header-actions{display:flex;align-items:center;gap:28px}
+.portfolio-case .site-header .availability img{width:48px;height:48px;max-width:none;margin:-12px;flex:none}
+:root[data-theme="dark"]{color-scheme:dark;--text:var(--color-text-primary-soft);--muted:var(--color-text-secondary);--caption:var(--color-text-muted);--theme-copy:var(--color-text-primary);--board-shadow:1px 2px 2.5px var(--color-effect-shadow-medium),1px 14px 24px var(--color-effect-shadow-soft)}
+:root[data-theme="dark"] body{background:var(--color-bg-page);color:var(--text)}
+:root[data-theme="dark"] .portfolio-home{background:var(--color-bg-page);isolation:isolate}
+:root[data-theme="dark"] .portfolio-home::before{content:'';position:absolute;z-index:-1;pointer-events:none;top:-452px;left:max(0px,calc(50% - 640px));width:min(1281px,100%);height:557px;background:#b7a7af;border-radius:50%;filter:blur(187.5px)}
+:root[data-theme="dark"] .skip-link{background:var(--color-bg-surface)}
+:root[data-theme="dark"] .locale{color:var(--color-text-muted)}
+:root[data-theme="dark"] .locale [aria-current],:root[data-theme="dark"] .mobile-case-controls .locale span{color:var(--color-text-primary)}
+:root[data-theme="dark"] .link-arrow{filter:invert(1);opacity:.96}
+/* Keep the original status asset; feather its outer halo on dark backgrounds. */
+.portfolio-home .availability img{animation:availability-breathe 4.6s ease-in-out infinite}
+:root[data-theme="dark"] .portfolio-home .availability img{
+  -webkit-mask-image:radial-gradient(circle closest-side,#000 22%,#000c 42%,#0005 66%,transparent 96%);
+  mask-image:radial-gradient(circle closest-side,#000 22%,#000c 42%,#0005 66%,transparent 96%);
+  opacity:.82;
+  animation:availability-breathe 4.6s ease-in-out infinite;
+}
+@keyframes availability-breathe{
+  0%,100%{opacity:.68;transform:scale(.93);filter:brightness(.95)}
+  50%{opacity:1;transform:scale(1.12);filter:brightness(1.12)}
+}
+.portfolio-home[data-motion-paused="true"] .availability img{animation-play-state:paused}
+.portfolio-home[data-motion-disabled="true"] .availability img{animation:none}
+/* Preserve the original case colors; share only the glass material and depth. */
+:root[data-theme="dark"]{
+  --case-surface-base:var(--color-bg-surface);
+  --case-surface-sheen:linear-gradient(180deg,rgba(255,255,255,.025),transparent 32%);
+  --case-surface-edge:rgba(255,255,255,.13);
+  --case-surface-shadow:0px 2px 4px rgba(0,0,0,.24),0px 14px 30px rgba(0,0,0,.22);
+}
+:root[data-theme="dark"] :is(.portfolio-home .work-grid .case-card,.metrics,.mobile-metrics){background:var(--case-surface-sheen),var(--case-surface-tint,linear-gradient(transparent,transparent)),var(--case-surface-base);border-color:var(--case-surface-edge);box-shadow:var(--case-surface-shadow);--caption:var(--color-text-secondary)}
+:root[data-theme="dark"] .forecast-card::before{background:#e3dbfc}
+:root[data-theme="dark"] .auto-card{--case-surface-tint:linear-gradient(270deg,#fc5a0215,transparent)}
+@media(width > 1100px){:root[data-theme="dark"] .forecast-card::before{filter:blur(137.75px)}}
+@media(max-width:1100px){
+  :root[data-theme="dark"] .forecast-card::before,:root[data-theme="dark"] .churn-card::before{filter:blur(100px);opacity:.4}
+}
+:root[data-theme="dark"] .small-card .progress-label{color:var(--color-text-secondary)}
+:root[data-theme="dark"] .how-section{background:transparent}
+:root[data-theme="dark"] .about-grid::before{background:#0f0f0f}
+:root[data-theme="dark"] .about-copy>p:not(.personal){color:var(--color-text-secondary)}
+:root[data-theme="dark"] .project-meta p,:root[data-theme="dark"] .result-summary p:first-child{color:var(--color-text-muted)!important}
+:root[data-theme="dark"] .case-bottom,:root[data-theme="dark"] .case-block hr{border-color:var(--color-border-subtle)}
+/* Source 906:83274 still has an unbound #202020 fill. Use its light counterpart's role. */
+:root[data-theme="dark"] [data-mobile-text="833:21710"]{--theme-copy:var(--color-text-primary)}
+@media(max-width:760px){
+  .theme-toggle{flex-basis:38px;width:38px;height:38px;padding:10px}
+  .theme-toggle .theme-orb{width:18px;height:18px}
+  .case-header-actions{gap:20px}
+}
+@media(max-width:600px){
+  .case-header-actions{display:none}
+  .mobile-case-controls,.mobile-case-controls .locale{font-size:16px}
+  .mobile-case-controls{gap:12px}
+  .churn-art{top:145px}
+  :root[data-theme="dark"] .portfolio-home{background:var(--color-bg-page)}
+  :root[data-theme="dark"] .portfolio-home::before{display:block}
+  :root[data-theme="dark"] .how-section{background:var(--color-bg-page)}
+}
+@media(max-width:359px){.mobile-case-controls,.mobile-case-controls .locale{font-size:14px}.mobile-case-controls{gap:10px}}

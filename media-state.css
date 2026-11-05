@@ -1,0 +1,14 @@
+/* The underlay is confined to the existing image slot; loaded art is unchanged. */
+.media-host{position:relative}
+.media-host[data-media-state]:not([data-media-state=ready]){background:var(--color-bg-surface,#f3f1ef)}
+.media-host img[data-media-state]:not([data-media-state=ready]){visibility:hidden}
+.media-notice{pointer-events:none;position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px;text-align:center;color:var(--color-text-muted,#666);font:400 16px/1.5 'Golos Text',sans-serif;z-index:3}
+.media-notice[hidden]{display:none}
+/* Long mobile boards can be several screens tall: keep recovery reachable
+   near their top rather than centering it far below the visible viewport. */
+.product-board .media-notice{bottom:auto;height:min(100%,360px)}
+.media-label{max-width:28ch;text-wrap:balance}
+.media-retry{max-width:100%;min-height:44px;padding:8px 16px;background:transparent;border:1px solid currentColor;border-radius:12px;cursor:pointer;white-space:normal;font:inherit;color:var(--color-text-primary,#111);pointer-events:auto}
+.media-retry[hidden]{display:none}
+.media-retry:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+:root[data-theme=dark] .media-host[data-media-state]:not([data-media-state=ready]){background:var(--color-bg-surface,#191c22)}

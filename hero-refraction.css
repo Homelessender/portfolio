@@ -1,0 +1,25 @@
+/* V2 has no optical overlay: only native text highlights and a non-interactive cursor. */
+:root.hero-refraction-cursor-enabled,
+:root.hero-refraction-cursor-enabled *{cursor:none!important}
+.hero-refraction-cursor{
+  position:fixed;left:0;top:0;width:7px;height:7px;margin:-3.5px 0 0 -3.5px;
+  box-sizing:border-box;border-radius:50%;z-index:2147483647;
+  pointer-events:none!important;user-select:none;
+  background:#202128;box-shadow:0 0 0 1.5px #ffffffe6;
+}
+:root[data-theme="dark"] .hero-refraction-cursor{background:#f4f4f7;box-shadow:0 0 0 1.5px #0f1115e6}
+.hero-refraction-cursor::after{
+  content:'';position:absolute;inset:-6px;border:1px solid currentColor;border-radius:50%;opacity:0;
+  color:#202128;transition:opacity 100ms ease-out;
+}
+:root[data-theme="dark"] .hero-refraction-cursor::after{color:#f4f4f7}
+.hero-refraction-cursor[data-action="interactive"]::after{opacity:.8}
+.hero-refraction-cursor[hidden]{display:none}
+@media(hover:none),(pointer:coarse),(prefers-reduced-motion:reduce),(forced-colors:active){
+  .hero-refraction-cursor{display:none!important}
+  :root.hero-refraction-cursor-enabled,:root.hero-refraction-cursor-enabled *{cursor:revert!important}
+}
+@media print{.hero-refraction-cursor{display:none!important}}
+
+/* Speed controls diameter only; pointer position remains immediate. */
+.hero-refraction-cursor{width:var(--cursor-size,10px);height:var(--cursor-size,10px);margin:calc(var(--cursor-size,10px) / -2) 0 0 calc(var(--cursor-size,10px) / -2);transition:width 90ms ease-out,height 90ms ease-out,margin 90ms ease-out}

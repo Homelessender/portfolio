@@ -1,0 +1,32 @@
+/* Selected glow2; autonomous night motion inside a fixed soft envelope. */
+/* Fixed feathered envelope: layer movement never exposes its rectangle. */
+:root[data-theme=dark] .portfolio-home #contact[data-study=candidate] .study-aurora{
+ --night-rise:clamp(240px,28vw,420px);
+ top:calc(-1 * var(--night-rise));height:calc(100% + var(--night-rise));
+ left:50%;width:100%;transform:translateX(-50%);scale:none;transition:none;filter:none;
+ mask-image:linear-gradient(transparent 0%,#00000005 10%,#0006 25%,#000c 38%,#000 50%,#000 62%,#000e 90%,transparent 100%);
+ -webkit-mask-image:linear-gradient(transparent 0%,#00000005 10%,#0006 25%,#000c 38%,#000 50%,#000 62%,#000e 90%,transparent 100%);
+}
+.night-veil-frame{position:absolute;inset:0;overflow:hidden;pointer-events:none;
+ mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+ -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+}
+:root[data-theme=dark] .portfolio-home #contact .night-veil-frame .study-aurora-sheet{
+ inset:auto;top:clamp(58px,6.72vw,101px);left:-40px;width:calc(100% + 80px);height:calc(100% - clamp(58px,6.72vw,101px) + 48px);max-width:none;
+ object-fit:fill;filter:blur(10px);mask-image:none;-webkit-mask-image:none;
+ opacity:.58;animation:night-veil-a 24s ease-in-out infinite;animation-play-state:paused;
+}
+:root[data-theme=dark] .portfolio-home #contact .night-veil-frame .night-veil-b{
+ opacity:.15;animation-name:night-veil-b;animation-duration:31s;animation-delay:-11s;
+}
+:root[data-theme=dark] .portfolio-home #contact .study-aurora[data-night-running=true] .study-aurora-sheet{animation-play-state:running}
+@keyframes night-veil-a{0%,100%{transform:translate(-1%,-.4%) scale(1.02);opacity:.52}50%{transform:translate(1%,.5%) scale(1.045);opacity:.64}}
+@keyframes night-veil-b{0%,100%{transform:translate(1.3%,.8%) scale(1.06);opacity:.17}50%{transform:translate(-1.2%,-.6%) scale(1.035);opacity:.12}}
+@media(prefers-reduced-motion:reduce){.portfolio-home #contact .night-veil-frame .study-aurora-sheet{animation:none!important;transform:none!important}}
+
+/* Keep the original over-scene colophon transparent; the generic dark footer
+   rule otherwise paints a hard44px strip across the selected soft scene. */
+:root[data-theme=dark] .portfolio-home .contact-section[data-study=candidate] .site-footer.contact-footer{background:transparent}
+
+/* Text and focus targets stay crisp above both landscape representations. */
+:root .portfolio-home .contact-section[data-study=candidate] .contact-copy{z-index:4}

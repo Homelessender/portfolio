@@ -1,0 +1,9 @@
+/* Pause retained decorative poses; never hide source artwork, copy or controls.
+   These selectors intentionally exclude entrance/reveal and interaction states. */
+:root[data-effects-hidden="true"] :is(.case-card .progress-label,.more-card .text-link,.availability-label,.hero-photo-slot img,.availability img,.how-breathe,.how-glow,.how-capsule,.how-particles span,.photo-stack,.churn-glow,.study-aurora-sheet),
+[data-effects-visible="false"] :is(.progress-label,.more-card .text-link,.availability-label,.hero-photo-slot img,.availability img,.how-breathe,.how-glow,.how-capsule,.how-particles span,.churn-glow,.study-aurora-sheet),
+:is(.hero-photo-slot,.availability)[data-effects-visible="false"] img,
+.photo-stack[data-effects-visible="false"],
+:root[data-effects-quality="limited"] :is(.hero-photo-slot img,.availability img,.how-breathe,.how-glow,.how-capsule,.how-particles span,.photo-stack,.churn-glow,.study-aurora-sheet){animation-play-state:paused!important}
+/* Availability previously lacked a reduced-motion exception. */
+@media(prefers-reduced-motion:reduce){.portfolio-home .availability img{animation:none!important}}

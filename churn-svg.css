@@ -1,0 +1,38 @@
+/* Figma 1041:63553: original vector paths, inner shadows and radial field.
+   The expanded composition applies to the single-column and tablet cards. */
+.churn-card::before{content:none}
+.churn-glow{position:absolute;pointer-events:none;width:680px;max-width:none;height:auto;left:50%;top:58%;transform:translate(-50%,-50%);translate:var(--card-glow-x,0px) var(--card-glow-y,0px);scale:var(--card-glow-scale,1)}
+.churn-glow{animation:churn-source-breathe 11s ease-in-out infinite;animation-play-state:paused}
+.churn-card.card-motion-visible .churn-glow{animation-play-state:running}
+@keyframes churn-source-breathe{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.04)}}
+[data-motion-paused="true"] .churn-card .churn-glow{animation-play-state:paused}
+:root[data-theme="dark"] .churn-glow{opacity:.4}
+.churn-expanded{display:none}
+.churn-expanded svg,.churn-expanded img{width:320px;max-width:100%;height:auto;overflow:visible}
+.churn-svg-ready .churn-expanded>img{display:none}
+.churn-expanded [data-churn-object]{transform-box:fill-box;transform-origin:center}
+@media(max-width:1100px){
+  .churn-card{display:flex;flex-direction:column;height:auto;min-height:550px}
+  .churn-card .churn-art{display:none!important}
+  .churn-card>.card-link{position:static;display:block;margin-top:28px}
+  .churn-card>.card-link::after{content:'';position:absolute;inset:0;border-radius:inherit}
+  .churn-card .text-link{position:static}
+  .churn-card>.case-art-stage{display:grid;place-items:center;position:relative;inset:auto;flex:1;min-height:210px;margin:24px 0;pointer-events:none}
+  .churn-expanded{display:grid;place-items:center;width:100%;position:relative;z-index:1}
+  .churn-card .case-tags{position:relative;inset:auto;max-width:none;margin-top:0;line-height:1.6}
+  .churn-glow{width:680px;top:58%}
+}
+@media(width > 700px) and (max-width:1100px){.churn-card{min-height:700px}}
+/* The two cards share a row: keep the CTA, artwork field and metadata on the
+   existing Forecast grid. Single-column cards retain their content flow. */
+@media(width > 700px) and (max-width:1100px){
+  .churn-card>.card-link{margin-top:0}
+  .churn-card .text-link{position:absolute;left:28px;top:240px}
+  .churn-card>.case-art-stage{position:absolute;left:28px;right:28px;top:308px;bottom:104px;margin:0;min-height:0}
+  .churn-card .case-tags{position:absolute;left:28px;right:28px;bottom:26px}
+}
+@media(prefers-reduced-motion:reduce){
+  .churn-glow{animation:none;translate:none;scale:none}
+  .churn-expanded [data-churn-object]{translate:none!important;rotate:none!important}
+}
+[data-motion-disabled="true"] .churn-glow{animation:none;translate:none;scale:none}

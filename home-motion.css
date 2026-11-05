@@ -1,0 +1,144 @@
+/* Full-card native links: a single keyboard stop, with native new-tab behavior. */
+/* Inline words preserve the original line wrapping, including hyphenated text. */
+/* Reuse the existing light and drift; only its initial envelope changes. */
+:root:not([data-theme="dark"]) .home-entrance-pending:not(.home-entering) .sunlight-window{opacity:0;animation:none}
+@media(prefers-reduced-motion:reduce){:root:not([data-theme="dark"]) .sunlight-window{animation:none}}
+:root:not([data-theme="dark"]) .home-entering .sunlight-window{animation:home-light-enter calc(1600ms * var(--home-entrance-scale,1)) linear both}
+@keyframes home-light-enter{0%{opacity:0}18%{opacity:.16}45%{opacity:.76}72%{opacity:.96}100%{opacity:1}}
+/* Dark top light is the original static body pseudo-element. Fade only its
+   opacity, independently of the hero so lower-section links cannot cut it off. */
+:root[data-theme="dark"] .portfolio-home::before{animation:dark-home-light-enter calc(1600ms * var(--home-entrance-scale,1)) linear both;will-change:opacity;transform:translateZ(0)}
+@keyframes dark-home-light-enter{0%{opacity:0}18%{opacity:.16}45%{opacity:.76}72%{opacity:.96}100%{opacity:1}}
+:root[data-theme="dark"] .portfolio-home[data-motion-paused="true"]::before{animation-play-state:paused}
+:root[data-theme="dark"] .portfolio-home[data-motion-disabled="true"]::before{animation:none;opacity:1}
+@media(prefers-reduced-motion:reduce){:root[data-theme="dark"] .portfolio-home::before{animation:none;opacity:1}}
+.home-entrance-pending .site-header>.availability,.home-entrance-pending .header-actions>*{opacity:0;transform:translateY(7px)}
+.home-entering .site-header>.availability,.home-entering .header-actions>*{animation:home-header-enter calc(700ms * var(--home-entrance-scale,1)) cubic-bezier(.22,.68,.24,1) calc(var(--header-delay,450ms) * var(--home-entrance-scale,1)) both}
+.home-entering .header-actions>:nth-child(1){--header-delay:540ms}
+.home-entering .header-actions>:nth-child(2){--header-delay:630ms}
+.home-entering .header-actions>:nth-child(3){--header-delay:720ms}
+@keyframes home-header-enter{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){:root:not([data-theme="dark"]) .home-entrance-pending .sunlight-window,.home-entrance-pending .site-header>.availability,.home-entrance-pending .header-actions>*{animation:none;opacity:1;transform:none}}
+.hero-reveal-pending .hero-word{position:relative;opacity:0;top:.5em;filter:blur(7px)}
+.hero-revealing .hero-word{animation:hero-word-reveal var(--word-duration,850ms) cubic-bezier(.22,.68,.24,1) var(--word-delay) both}
+@keyframes hero-word-reveal{from{opacity:0;top:.5em;filter:blur(7px)}to{opacity:1;top:0;filter:blur(0)}}
+.hero-reveal-pending .hero-photo-slot{opacity:0;transform:translateY(12px)}
+.hero-revealing .hero-photo-slot{animation:hero-photo-reveal calc(900ms * var(--home-entrance-scale,1)) cubic-bezier(.22,.68,.24,1) calc(1320ms * var(--home-entrance-scale,1)) both}
+@keyframes hero-photo-reveal{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.hero-reveal-pending .hero-word{animation:none;opacity:1;top:0;filter:none}}
+.hero-meta-pending .metadata-row>span{opacity:0;transform:translateY(10px);filter:blur(3px)}
+.hero-meta-revealing .metadata-row>span{animation:hero-meta-reveal calc(750ms * var(--home-entrance-scale,1)) cubic-bezier(.22,.68,.24,1) var(--meta-delay,0ms) both}
+@keyframes hero-meta-reveal{from{opacity:0;transform:translateY(10px);filter:blur(3px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+@media(prefers-reduced-motion:reduce){.hero-meta-pending .metadata-row>span{animation:none;opacity:1;transform:none;filter:none}}
+.work-reveal-pending>:is(.case-card,.corner-shell){opacity:0;transform:translateY(28px);pointer-events:none}
+.work-revealing>:is(.case-card,.corner-shell){animation:work-card-reveal calc(1100ms * var(--home-entrance-scale,1)) cubic-bezier(.22,.68,.24,1) var(--card-delay,0ms) both}
+@keyframes work-card-reveal{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.work-reveal-pending>:is(.case-card,.corner-shell){animation:none;opacity:1;transform:none;pointer-events:auto}}
+/* Returning visitors see the complete composition in one shared entrance. */
+.home-return.home-entering .site-header>.availability,
+.home-return.home-entering .header-actions>*,
+.home-return .hero-revealing .hero-photo-slot,
+.home-return .hero-meta-revealing .metadata-row>span,
+.home-return .work-revealing>:is(.case-card,.corner-shell),
+:root:not([data-theme="dark"]) .home-return.home-entering .sunlight-window,
+:root[data-theme="dark"] .portfolio-home.home-return::before{animation-duration:550ms;animation-delay:0ms}
+/* Observe each About element so the mobile portrait waits for its own entry. */
+.about-reveal-pending{opacity:0;transform:translateY(24px);filter:blur(3px)}
+.about-revealing{animation:about-content-reveal 950ms cubic-bezier(.22,.68,.24,1) var(--about-delay,0ms) both}
+.portrait.about-reveal-pending{filter:none}
+.portrait.about-revealing{animation-name:about-portrait-reveal;animation-duration:1150ms}
+@keyframes about-content-reveal{from{opacity:0;transform:translateY(24px);filter:blur(3px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+@keyframes about-portrait-reveal{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.about-reveal-pending{animation:none;opacity:1;transform:none;filter:none}}
+.linked-card>.card-link{position:absolute;inset:0;z-index:5;border-radius:inherit}
+.linked-card:has(.card-link:focus-visible){outline:2px solid #8798ff;outline-offset:5px}
+.linked-card:hover .text-link{text-decoration:underline;text-underline-offset:5px}
+.linked-card>.card-link:focus-visible{outline:none}
+
+/* One soft sweep across the status text when the pointer enters the whole card. */
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+  .auto-card:hover .progress-label{
+    background-image:linear-gradient(110deg,currentColor 40%,color-mix(in srgb,currentColor 25%,white) 50%,currentColor 60%);
+    background-size:300% 100%;
+    background-position:100% 0;
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:progress-sheen 1.65s ease-in-out 1 both;
+  }
+}
+@keyframes progress-sheen{from{background-position:100% 0}to{background-position:0% 0}}
+
+/* The six original stars now share the card artwork's responsive coordinates. */
+.auto-visual{height:auto!important;aspect-ratio:282.42/241;overflow:visible;pointer-events:none}
+.auto-visual .auto-cards{width:100%;height:auto;position:relative}
+.auto-visual .auto-star{display:block;max-width:none;height:auto;z-index:1}
+.auto-visual .auto-star-1{left:3.03%;top:93.13%;width:6.37%}
+.auto-visual .auto-star-2{left:-10.42%;top:76.54%;width:13.1%}
+.auto-visual .auto-star-3{left:-5.82%;top:91.89%;width:6.37%}
+.auto-visual .auto-star-4{left:86.60%;top:17.61%;width:3.54%}
+.auto-visual .auto-star-5{left:75.27%;top:91.06%;width:7.08%}
+.auto-visual .auto-star-6{left:89.79%;top:9.73%;width:8.14%}
+@media(max-width:1100px){.auto-visual{right:20px;bottom:24px}}
+
+/* Exact exported light layers, with the glass label separated for motion. */
+.how-section{position:relative}
+.how-visual{position:relative;width:742px;max-width:100%;aspect-ratio:1;container-type:inline-size}
+.how-section .how-source{position:static;display:block;width:100%;height:auto;max-width:none;transform:none}
+.how-live{display:block;position:absolute;inset:0}
+.how-field{position:absolute;inset:0;
+  /* Fade on the stationary parent, before About covers the moving glow.
+     A larger wake canvas alone cannot prevent that section-boundary cut. */
+  mask-image:radial-gradient(ellipse 50% 50% at 50% 50%,#000 68%,transparent 90%);
+  -webkit-mask-image:radial-gradient(ellipse 50% 50% at 50% 50%,#000 68%,transparent 90%);
+}
+.how-source{visibility:hidden}
+:root:not([data-theme="dark"]) .dust-preview[data-motion-disabled="true"] .how-source{visibility:visible}
+:root:not([data-theme="dark"]) .dust-preview[data-motion-disabled="true"] .how-live{display:none}
+.how-reveal,.how-breathe{position:absolute;inset:0}
+.how-reveal{transform:translateY(var(--how-entry-y,0px)) scale(var(--how-scale,1));opacity:var(--how-opacity,1);will-change:transform;transition:transform .18s ease-out,opacity .18s ease-out}
+.how-breathe{animation:how-breathe 9s ease-in-out infinite;animation-play-state:paused}
+.how-reveal{translate:var(--how-pointer-x,0px) var(--how-pointer-y,0px);transition:translate .7s cubic-bezier(.25,.46,.45,.94),transform .18s ease-out,opacity .18s ease-out}
+@media(prefers-reduced-motion:reduce){.how-reveal{translate:none}}
+.how-section .how-glow{position:absolute;max-width:none;height:auto;transform:none;pointer-events:none;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-play-state:paused}
+.how-live.is-visible .how-breathe,.how-live.is-visible .how-glow{animation-play-state:running}
+.how-section .glow-pink{left:0;top:0;width:100%;animation-name:how-light-pink;animation-duration:13s;animation-delay:-3s}
+.how-section .glow-soft{left:16.464%;top:16.464%;width:67.073%;animation-name:how-light-soft;animation-duration:11s;animation-delay:-5s}
+.how-section .glow-blue{left:30.174%;top:30.63%;width:39.958%;animation-name:how-light-blue;animation-duration:9s;animation-delay:-1s}
+.how-wake{position:absolute;inset:-30%;pointer-events:none;opacity:var(--how-wake-alpha,0);background:radial-gradient(ellipse 15% 13.125% at var(--how-wake-x,50%) var(--how-wake-y,50%),#89b4fff0 0%,#bad0ffdd 24%,#ee97c9cc 52%,transparent 100%);filter:blur(12px)}
+:root[data-theme="dark"] .how-wake{background:radial-gradient(ellipse 15% 13.125% at var(--how-wake-x,50%) var(--how-wake-y,50%),#89b4ffdd 0%,#bad0ffbb 24%,#eba7cea6 52%,transparent 100%)}
+.how-capsule{position:absolute;left:50%;top:50.15%;width:79.58%;height:12.78%;transform:translate(-50%,-50%) rotate(-3.072916deg);border-radius:48px;display:flex;align-items:center;justify-content:center;white-space:nowrap;font-size:3.0432cqw;font-weight:500;line-height:1.45;color:#000c;background:#f0f0f033;border:1px solid #ffffff50;backdrop-filter:blur(4px);box-shadow:inset 0 1px 0 #ffffff33,0 4px 14px #00000012}
+@keyframes how-breathe{0%,100%{transform:scale(.97)}50%{transform:scale(1.06)}}
+/* Float independently of the source's centering and -3.072916deg tilt. */
+.how-capsule{animation:how-capsule-float 12s ease-in-out infinite;animation-play-state:paused}
+.how-live.is-visible .how-capsule{animation-play-state:running}
+@keyframes how-capsule-float{
+  0%,100%{translate:0 0;rotate:0deg}
+  25%{translate:.4cqw -.9cqw;rotate:.35deg}
+  50%{translate:0 -.25cqw;rotate:0deg}
+  75%{translate:-.4cqw .7cqw;rotate:-.35deg}
+}
+[data-motion-disabled="true"] .how-capsule{animation:none;translate:none;rotate:none}
+@media(prefers-reduced-motion:reduce){.how-capsule{animation:none;translate:none;rotate:none}}
+/* Join the existing warm section colours instead of exposing the cool page tail. */
+:root:not([data-theme="dark"]) .about-section{background:linear-gradient(to bottom,#f8f6f5,#fbf8f4)}
+/* The original coloured layers drift in different directions and at different rates. */
+@keyframes how-light-pink{0%,100%{transform:translate(-3%,1%) scale(1,.96);opacity:.9}50%{transform:translate(3%,-2%) scale(1.04,1.06);opacity:1}}
+@keyframes how-light-soft{0%,100%{transform:translate(7%,-5%) scale(.96,1.05);opacity:.88}50%{transform:translate(-7%,5%) scale(1.08,.98);opacity:1}}
+@keyframes how-light-blue{0%,100%{transform:translate(-10%,7%) scale(.95);opacity:.85}50%{transform:translate(10%,-7%) scale(1.1);opacity:1}}
+@media(width > 1100px){.how-visual{position:absolute;width:657.2px;max-width:none;left:50%;top:50%;transform:translate(calc(-50% - 30px),-50%)}}
+@media(max-width:1100px){.how-visual{width:650px}}
+/* The oversized source must centre in the viewport, not expand the grid track. */
+@media(max-width:600px){.how-section{grid-template-columns:minmax(0,1fr)}.how-visual{width:calc((100vw - 40px)*1.247);max-width:none}}
+@media(prefers-reduced-motion:reduce){.how-reveal{transform:none;opacity:1;will-change:auto;transition:none}.how-breathe,.how-section .how-glow{animation:none}}
+
+/* Scroll envelope belongs to the entire source orb; inner pointer, breathing
+   and glass-label movement retain their independent transforms. */
+#how-i-work .how-live{transform:translateY(var(--how-scroll-y,0px)) scale(var(--how-scroll-scale,1));opacity:var(--how-scroll-opacity,1);transform-origin:50% 50%;transition:transform .24s cubic-bezier(.22,.68,.24,1),opacity .24s ease-out;will-change:transform}
+[data-motion-disabled="true"] #how-i-work .how-live{transform:none;opacity:1;transition:none;will-change:auto}
+@media(prefers-reduced-motion:reduce){#how-i-work .how-live{transform:none;opacity:1;transition:none;will-change:auto}}
+
+/* Internal navigation already reveals the complete page; do not replay a
+   second light entrance underneath the document transition. */
+:root[data-page-arrival="fast"] .portfolio-home::before,
+:root[data-page-arrival="fast"] .home-entering .sunlight-window{animation:none}

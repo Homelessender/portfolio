@@ -1,0 +1,93 @@
+/* Transform the existing light fields; leave source shapes and clipping intact. */
+.forecast-card::before,.churn-card::before{
+  translate:var(--card-glow-x,0px) var(--card-glow-y,0px);
+  scale:var(--card-glow-scale,1);
+}
+.card-motion-canvas{opacity:0;pointer-events:none}
+.forecast-surface>.forecast-phone{
+  position:absolute;inset:0;width:100%;height:100%;max-width:none;
+  transform:none;mask-image:none;
+}
+/* A complete phone frame avoids a chart without its separately painted phone
+   during fast Safari scroll-back. Retain the DOM image as accessible fallback. */
+.forecast-surface>img.card-motion-source{opacity:0}
+[data-motion-disabled="true"] .forecast-surface>canvas{display:none}
+[data-motion-disabled="true"] .forecast-surface>img.card-motion-source{opacity:1}
+/* The gradient reaches the contour without a pale decorative outline.
+   Keep border width for layout and the separate keyboard-focus contour. */
+.work-grid .case-card,
+:root[data-theme="dark"] .work-grid .case-card{border-color:transparent}
+.auto-visual .card-motion-canvas{position:absolute;left:-10%;top:-10%;width:120%;height:120%}
+.card-motion-auto-ready img.auto-cards{opacity:0}
+.card-motion-auto-ready canvas.auto-cards{opacity:1!important}
+.card-motion-churn-ready img.churn-art{opacity:0}
+.card-motion-churn-ready canvas.churn-art{opacity:1!important}
+.auto-cards{translate:0 var(--card-art-y,0px);rotate:var(--card-art-angle,0deg)}
+.case-card .link-arrow{translate:var(--card-arrow-x,0px) 0}
+[data-motion-paused="true"] .case-card .progress-label{animation-play-state:paused}
+[data-motion-disabled="true"] .case-card .progress-label{animation:none}
+/* A separate contour keeps the larger hover shadow outside the clipped card. */
+.work-grid .corner-hover-path{opacity:0;transition:opacity 480ms cubic-bezier(.22,.68,.24,1)}
+.work-grid .corner-hover-tint{flood-color:#494056;flood-opacity:.11}
+:root[data-theme="dark"] .work-grid .corner-hover-tint{flood-color:#000;flood-opacity:.28}
+@media(hover:hover) and (pointer:fine){
+  .work-grid>.corner-shell:has(>.case-card:hover) .corner-hover-path,
+  .work-grid>.corner-shell:has(>.case-card .card-link:focus-visible) .corner-hover-path{
+    opacity:1;
+  }
+}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+  .more-card:is(:hover,:has(.card-link:focus-visible)) .text-link{
+    background-image:linear-gradient(110deg,currentColor 40%,color-mix(in srgb,currentColor 25%,white) 50%,currentColor 60%);
+    background-size:300% 100%;background-position:100% 0;
+    background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    animation:progress-sheen 1.65s ease-in-out 1 both;
+  }
+}
+[data-motion-paused="true"] .more-card .text-link{animation-play-state:paused}
+[data-motion-disabled="true"] .more-card .text-link{animation:none;background:none;-webkit-text-fill-color:currentColor}
+@media(prefers-reduced-motion:reduce){
+  .forecast-card::before,.churn-card::before{translate:none;scale:none}
+  .auto-cards,.auto-star,.case-card .link-arrow{translate:none!important;rotate:none!important}
+  .card-motion-canvas{display:none}
+  .card-motion-source{opacity:1!important}
+}
+[data-motion-disabled="true"] .card-motion-auto-ready .card-motion-canvas{display:none}
+[data-motion-disabled="true"] .card-motion-auto-ready img.auto-cards{opacity:1}
+[data-motion-disabled="true"] .card-motion-churn-ready .card-motion-canvas{display:none}
+[data-motion-disabled="true"] .card-motion-churn-ready img.churn-art{opacity:1}
+/* Preserve the source gradients while keeping idle cards visually quieter. */
+:root .work-grid .forecast-card::before,
+:root .work-grid .churn-card .churn-glow{
+  opacity:calc(var(--card-field-peak,1) * var(--card-field-presence,.65));
+  transition:opacity 650ms cubic-bezier(.22,.68,.24,1);
+}
+:root[data-theme="dark"] .work-grid .churn-card{--card-field-peak:.4}
+@media(max-width:1100px){
+  :root[data-theme="dark"] .work-grid .forecast-card{--card-field-peak:.4}
+}
+.work-grid .case-card:has(.card-link:focus-visible){--card-field-presence:1}
+@media(hover:hover) and (pointer:fine){
+  .work-grid .case-card:hover{--card-field-presence:1}
+}
+@media(prefers-reduced-motion:reduce){
+  :root .work-grid .forecast-card::before,
+  :root .work-grid .churn-card .churn-glow{transition:none}
+}
+
+/* Keep the moving blurred Forecast field on one compositing layer in Safari. */
+.forecast-card::before{will-change:transform,opacity;backface-visibility:hidden}
+
+/* The same highlight follows mobile attention rather than a sticky tap hover. */
+@media(hover:none){
+  .work-grid .case-card.card-motion-active{--card-field-presence:1}
+}
+@media(hover:none) and (prefers-reduced-motion:no-preference){
+  .auto-card.card-motion-active .progress-label,
+  .more-card.card-motion-active .text-link{
+    background-image:linear-gradient(110deg,currentColor 40%,color-mix(in srgb,currentColor 25%,white) 50%,currentColor 60%);
+    background-size:300% 100%;background-position:100% 0;
+    background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    animation:progress-sheen 1.65s ease-in-out 1 both;
+  }
+}

@@ -1,0 +1,18 @@
+/* An immutable cache of the accepted static material stack. Water remains live. */
+.contact-landscape[data-static-scene]>.contact-water-source{display:none!important}
+.contact-landscape[data-static-scene]>.contact-static-scene{position:absolute;inset:0;z-index:0;opacity:var(--contact-sharp-opacity,1);}
+.contact-static-scene img.contact-static-image{position:static;inset:auto;transform:none;filter:none;object-fit:fill;display:block;width:100%;height:auto;max-width:none;opacity:1!important;visibility:visible!important;transition:none!important}
+.contact-landscape[data-static-scene]>.contact-terrain{z-index:1;mask:none!important;-webkit-mask:none!important;background:none!important}
+.contact-landscape[data-static-scene]>.contact-terrain::before{content:none!important}
+.contact-landscape[data-static-scene]>.contact-terrain .contact-landscape-canvas{opacity:0;transition:none!important}
+.contact-landscape[data-static-scene]>.contact-terrain .contact-landscape-canvas.is-ready{opacity:1}
+/* Keep the accepted diffuse spill and its entrance curve. Only its source is cached. */
+.contact-focus-soft.contact-static-scene{aspect-ratio:1774/585}
+@media(prefers-reduced-motion:reduce){.contact-landscape[data-static-scene]>.contact-static-scene{opacity:1!important}}
+[data-motion-disabled=true] .contact-landscape[data-static-scene]>.contact-static-scene{opacity:1!important}
+
+
+/* Fine-pointer Safari Churn retains one prepared copy of the same atlas.
+   IMG still owns layout and is exposed whenever preparation/context fails. */
+body.case-churn .contact-static-scene>.contact-static-bitmap{position:absolute;inset:0 auto auto 0;display:block;width:100%;height:auto;max-width:none}
+body.case-churn .contact-static-scene[data-bitmap-ready]>.contact-static-image{opacity:0!important}

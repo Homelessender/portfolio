@@ -1,0 +1,11 @@
+/* CSS radius is a no-JS fallback; the path carries Figma's smoothing parameter. */
+.corner-shell{position:relative;min-width:0;display:grid;isolation:isolate}
+.corner-shell>.smooth-shape{position:relative;box-shadow:none!important;border-color:transparent!important;corner-shape:round;z-index:1}
+.corner-shadow,.corner-stroke{position:absolute;inset:0;max-width:none;overflow:visible;pointer-events:none}
+.corner-shadow{z-index:0}.corner-stroke{z-index:2}
+.corner-shell:has(>.linked-card .card-link:focus-visible)>.corner-stroke path{stroke:#8798ff;stroke-width:3px}
+/* Exported desktop boards already contain their Figma contour and external shadows. */
+.case-desktop .case-hero-image,.case-desktop .product-board a,.case-desktop .product-board img{border-radius:0}
+.case-desktop .case-hero-image{height:auto;aspect-ratio:auto;object-fit:contain}
+/* Mobile exports need one contour on the figure, never another radius on the pixels. */
+.mobile-board img,.mobile-hero-visual img,.case-mobile .mobile-board a{border-radius:0!important}

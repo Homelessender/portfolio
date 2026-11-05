@@ -1,0 +1,27 @@
+/* Selected option1: blur the masked scene as a whole, then let it spill
+   outside the landscape box. Its source terrain still owns the original crop. */
+.portfolio-home .contact-landscape{overflow:visible;z-index:3}
+.portfolio-home .contact-landscape > .contact-terrain{
+ opacity:var(--contact-sharp-opacity,1);
+}
+.portfolio-home .contact-landscape > .contact-focus-layer{
+ position:absolute;inset:-80px 0 0;z-index:3;pointer-events:none;
+ opacity:var(--contact-soft-opacity,1);
+ overflow:hidden;
+}
+.portfolio-home .contact-focus-diffuse{
+ position:absolute;inset:80px 0 0;
+ filter:blur(clamp(10px,1.4vw,22px));
+}
+.portfolio-home .contact-focus-soft{
+ position:absolute;inset:0 0 auto;width:100%;margin:0;
+ pointer-events:none;
+}
+.portfolio-home .contact-focus-layer[data-compositing=true]{will-change:opacity}
+.portfolio-home .contact-focus-layer[hidden]{display:none}
+@media(prefers-reduced-motion:reduce){
+ .portfolio-home .contact-focus-layer{display:none!important}
+ .portfolio-home .contact-landscape > .contact-terrain{opacity:1!important}
+}
+[data-motion-disabled=true] .contact-focus-layer{display:none!important}
+[data-motion-disabled=true] .contact-landscape > .contact-terrain{opacity:1!important}

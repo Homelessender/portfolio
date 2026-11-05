@@ -1,0 +1,49 @@
+@font-face{font-family:OrbitNumeral;src:url('/assets/fonts/404-numeral.ttf') format('truetype');font-style:normal;font-weight:100;font-display:swap}
+@font-face{font-family:Manrope;src:url('/assets/fonts/font-2.ttf') format('truetype');font-style:normal;font-weight:400;font-display:swap}
+:root{color-scheme:light;--error-bg:#faf8f6;--error-ink:#101318;--error-glass:#f3e7ee88;--error-border:#fff8;--error-shadow:#bc88a345}
+:root[data-theme=dark]{color-scheme:dark;--error-bg:#17171b;--error-ink:#f5f2f6;--error-glass:#36303c88;--error-border:#c9b3d43d;--error-shadow:#0006}
+*{box-sizing:border-box}html,body{margin:0;min-width:280px}body{background:var(--error-bg);color:var(--error-ink);font-family:Manrope,Arial,sans-serif;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}a:focus-visible{outline:2px solid #717be2;outline-offset:6px}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.error-header{height:110px;padding:40px clamp(24px,4.05vw,80px) 20px;display:flex;align-items:center}.error-header a{display:inline-flex;align-items:center;min-height:44px;font-size:18px}.error-header a:hover{text-decoration:underline;text-underline-offset:5px}
+.error-main{min-height:calc(100svh - 110px);display:flex;align-items:center;justify-content:center;padding:0 24px 120px;overflow:visible}.error-content{width:100%;max-width:1100px;text-align:center}.error-art{position:relative;margin:0 auto;width:min(850px,100%);height:430px;display:flex;align-items:center;justify-content:space-between;padding:0 76px 0 52px;isolation:isolate}.error-number{font-family:OrbitNumeral,Arial,sans-serif;font-size:270px;line-height:1;font-weight:100;transform:translateY(23px);letter-spacing:-.06em;position:relative;z-index:1}.error-message{position:relative;margin:50px auto 0;font-size:28px;line-height:1.5;font-weight:400;text-wrap:balance;max-width:760px}.error-return{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:64px;margin-top:36px;padding:14px 40px;font-size:18px;line-height:1.5;border-radius:48px;background:var(--error-glass);border:1px solid var(--error-border);backdrop-filter:blur(12px);box-shadow:inset 0 1px 0 #ffffff33,0 7px 18px var(--error-shadow);transition:background .25s,box-shadow .25s}.error-return img{width:18px;height:auto;transform:rotate(-45deg)}.error-return:hover{background:#f4e5ed99;box-shadow:inset 0 1px 0 #fff6,0 9px 24px var(--error-shadow)}.error-return:active{box-shadow:inset 0 1px 4px var(--error-shadow)}[data-theme=dark] .error-return:hover{background:#52405b99}[data-theme=dark] .error-return img{filter:invert(1)}
+
+@media(max-width:1000px){.error-art{width:min(760px,100%);height:clamp(260px,45vw,400px);padding:0 4%}.error-number{font-size:clamp(120px,26vw,245px)}.error-message{font-size:clamp(22px,2.8vw,28px)}}
+@media(max-width:600px){.error-header{height:88px;padding:20px 24px}.error-header a{font-size:16px}.error-main{min-height:calc(100svh - 88px);padding:24px 24px 72px}.error-art{height:clamp(190px,62vw,320px);padding:0 0}.error-number{font-size:clamp(106px,28vw,168px)}.error-message{font-size:22px;max-width:360px;margin-top:clamp(24px,calc(14.12vw - 36.72px),48px);line-height:1.45}.error-return{font-size:16px;min-height:56px;padding:14px 25px;margin-top:28px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+
+@media(max-width:600px){.error-number{transform:translateY(10px)}}
+
+/* Source How component: the same layers, mask, timelines and pointer/wake engine.
+   Only outer placement/scale changes; the process label is replaced by the 404 UI. */
+.error-orb-mount{position:absolute;inset:0;pointer-events:none}
+.error-orb-mount .how-visual{position:absolute;left:50%;top:50%;width:650px;height:auto;aspect-ratio:1;max-width:none;transform:translate(-50%,-50%)}
+.error-orb .how-field{z-index:1;overflow:clip}
+.error-number{z-index:3;pointer-events:none}
+.orbit-track{position:absolute;inset:0;display:block;width:100%;height:100%;overflow:visible;pointer-events:none;translate:calc(var(--how-pointer-x,0px)*.25) calc(var(--how-pointer-y,0px)*.25);transition:translate .9s cubic-bezier(.25,.46,.45,.94)}
+.orbit-back{z-index:0}.orbit-front{z-index:2}
+.orbit-line{stroke:#d092b3;stroke-width:1;vector-effect:non-scaling-stroke}
+.orbit-back .orbit-line{opacity:.22}.orbit-front .orbit-line{opacity:.48}
+.satellite-core{fill:#fff9fc;filter:drop-shadow(0 0 3px #fff)}
+.satellite-halo{fill:#f5c3dd;opacity:.5;filter:blur(6px)}
+.satellite-blue .satellite-halo{fill:#8cbaff}.satellite-blue .satellite-core{fill:#eff8ff}
+[data-theme=dark] .orbit-line{stroke:#ebc0dd}
+@media(max-width:1000px){.error-orb-mount .how-visual{width:76%}}
+@media(max-width:600px){.error-orb-mount .how-visual{width:90%}}
+@media(prefers-reduced-motion:reduce){.orbit-track{translate:none;transition:none}}
+/* Fit shorter desktop windows continuously, without a one-pixel size jump.
+   650px tall -> compact; 900px tall -> the original full composition. */
+@media(max-height:900px) and (min-width:601px){
+  :root{--error-header-height:clamp(76px,calc(13.6svh - 12.4px),110px);--error-fit-number:clamp(160px,calc(44svh - 126px),270px);--error-fit-message:clamp(24px,calc(1.6svh + 13.6px),28px)}
+  .error-header{height:var(--error-header-height);padding-top:clamp(16px,calc(9.6svh - 46.4px),40px);padding-bottom:20px}
+  .error-main{min-height:calc(100svh - var(--error-header-height));padding-top:clamp(0px,calc(43.2px - 4.8svh),12px);padding-bottom:clamp(44px,calc(30.4svh - 153.6px),120px)}
+  .error-art{max-width:clamp(540px,calc(124svh - 266px),850px);height:clamp(220px,calc(84svh - 326px),430px)}
+  .error-number{font-size:var(--error-fit-number)}
+  .error-orb-mount .how-visual{max-width:clamp(370px,calc(112svh - 358px),650px)}
+  .error-message{margin-top:clamp(36px,calc(5.6svh - .4px),50px);font-size:var(--error-fit-message)}
+  .error-return{margin-top:clamp(22px,calc(5.6svh - 14.4px),36px);min-height:clamp(57px,calc(2.8svh + 38.8px),64px)}
+}
+@media(max-height:900px) and (min-width:601px) and (max-width:1000px){
+  .error-art{height:min(clamp(260px,45vw,400px),clamp(220px,calc(84svh - 326px),430px))}
+  .error-number{font-size:min(clamp(120px,26vw,245px),var(--error-fit-number))}
+  .error-message{font-size:min(clamp(22px,2.8vw,28px),var(--error-fit-message))}
+}

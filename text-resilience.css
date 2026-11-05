@@ -1,0 +1,66 @@
+/* Intrinsic wrapping keeps the source layout until text no longer fits. */
+.site-header,.header-actions,.mobile-case-controls{flex-wrap:wrap}
+.site-header{height:auto}
+.header-actions,.mobile-case-controls{max-width:100%}
+.hero :is(.hero-person,.hero-role,.hero-greeting){white-space:normal;max-width:100%}
+.hero .hero-person{flex-wrap:wrap}
+.hero h1,.about-copy{overflow-wrap:anywhere;min-width:0}
+.hero .hero-role{white-space:normal!important}
+.contact-copy h2{overflow-wrap:anywhere}
+.case-block :is(p,h2,h3){overflow-wrap:anywhere;min-width:0}
+.metadata-row span{max-width:100%;overflow-wrap:anywhere}
+.about-grid{min-width:0}
+.case-bottom{flex-wrap:wrap}
+.case-bottom a{max-width:100%;overflow-wrap:anywhere}
+.case-churn :is(.metrics,.mobile-metrics) dt{grid-template-columns:minmax(0,1fr) auto minmax(min-content,1fr)}
+.floating-contact{max-width:calc(100vw - 32px)}
+.dock-panel{max-height:calc(100dvh - 110px);overflow:auto}
+.dock-item{height:auto;padding-block:12px;white-space:normal;overflow-wrap:anywhere}
+.dock-item-label{min-width:0}
+.dock-feedback{white-space:normal;overflow-wrap:anywhere}
+@media(max-width:760px){
+ .about-grid{grid-template-columns:minmax(0,1fr)}
+ .site-header{align-items:flex-start}
+ .hero :is(.hero-person,.hero-role,.hero-greeting){white-space:normal!important}
+}
+@media(max-width:600px){.case-main{overflow-x:clip;overflow-y:visible}}
+
+/* Only text-only enlargement needs this layout adaptation. Browser page zoom
+   already selects the existing responsive layout through the CSS viewport. */
+:root[data-text-enlarged=true] .metadata-row span{white-space:normal!important}
+:root[data-text-enlarged=true] .case-desktop .case-hero h1{min-width:0;max-width:100%;overflow-wrap:anywhere}
+/* Reuse the existing narrow hero flow when enlarged text outgrows two columns. */
+:root[data-text-enlarged=true] .case-desktop .case-hero{grid-template-columns:minmax(0,1fr);grid-template-rows:auto;grid-template-areas:'title' 'meta' 'art' 'result'}
+:root[data-text-enlarged=true] .case-desktop .case-hero-art{max-width:760px;margin-top:28px}
+:root[data-text-enlarged=true] .case-card{display:flex;flex-direction:column;height:auto;min-height:0;gap:20px}
+:root[data-text-enlarged=true] .case-card :is(h2,p){max-width:100%;white-space:normal;overflow-wrap:anywhere}
+:root[data-text-enlarged=true] .case-card :is(.card-link,.text-link,.progress-label,.case-tags){position:relative;inset:auto;margin:0;max-width:100%}
+:root[data-text-enlarged=true] .case-card .case-art-stage{display:grid;place-items:center;position:relative;inset:auto;flex:none;height:340px;min-height:340px;width:100%;margin:0;overflow:hidden}
+:root[data-text-enlarged=true] .case-art-stage>:is(.forecast-phone,.churn-art){left:50%;right:auto;top:0;bottom:auto;width:min(280px,100%);height:auto}
+/* Preserve the source artwork's optical centers, including transparent padding. */
+:root[data-text-enlarged=true] .case-art-stage>.forecast-phone{transform:translateX(-59.57%)}
+:root[data-text-enlarged=true] .case-art-stage>.churn-art{transform:translateX(-75.23%)}
+:root[data-text-enlarged=true] .case-card .auto-art{position:relative;inset:auto;margin:auto;max-width:100%}
+:root[data-text-enlarged=true] .case-card .case-tags{margin-top:auto}
+:root[data-text-enlarged=true] .work-grid>.corner-shell{grid-row:auto}
+:root[data-text-enlarged=true] .case-card{grid-row:auto}
+:root[data-text-enlarged=true] :is(.mobile-metrics,.metrics){padding-inline:12px;grid-template-columns:1fr!important}
+:root[data-text-enlarged=true] :is(.mobile-metrics,.metrics) :is(dt,dd){max-width:100%;overflow-wrap:anywhere;white-space:normal}
+:root[data-text-enlarged=true] .case-churn :is(.metrics,.mobile-metrics) dt{display:flex;justify-content:center;flex-wrap:wrap}
+:root[data-text-enlarged=true] .editorial-row{grid-template-columns:minmax(0,1fr);gap:24px}
+:root[data-text-enlarged=true] .dock-trigger{height:auto;white-space:normal;min-width:0}
+:root[data-text-enlarged=true] .dock-panel{width:min(360px,calc(100vw - 32px))}
+:root[data-text-enlarged=true] .dock-feedback{font-size:16px}
+
+/* Content may exceed the reference's fixed CTA slot before a zoom breakpoint.
+   The measured override is absent while the reference spacing still fits. */
+.work-grid .case-card[data-cta-layout="absolute"] .text-link{top:var(--content-cta-top)!important}
+.work-grid .case-card[data-cta-layout="absolute"]{min-height:var(--content-card-height)}
+.work-grid .case-card[data-cta-layout="flow"]>.card-link{margin-top:var(--content-cta-gap)!important}
+/* Reflow the complete board rather than shrink or truncate a single caption. */
+.case-desktop .metrics[data-content-columns]{grid-template-columns:repeat(var(--content-columns),minmax(0,1fr))}
+
+/* The text-only More card can wrap before the enlarged-layout threshold.
+   Primary artwork cards retain their authored title/artwork relationship. */
+.work-grid .more-card h2{white-space:normal;max-width:100%;overflow-wrap:anywhere}
+.work-grid .small-card[data-content-height]{min-height:var(--secondary-card-height)}

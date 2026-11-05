@@ -1,0 +1,143 @@
+body{background:linear-gradient(131.662deg,#fbf8f4 0%,#f3f4f9 84.989%)}.home-main{overflow:clip}.hero{max-width:1440px;margin:auto;padding:104px var(--gutter) 48px;text-align:center}.hero h1{font-size:clamp(44px,4.722vw,68px);line-height:1.36765;letter-spacing:.013em;font-weight:400}.hero-meta{max-width:934px;margin:24px auto 0;font:24px/1.375 'Golos Text',Arial,sans-serif;color:var(--muted)}.metadata-row{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.metadata-row span{white-space:nowrap}.metadata-row span+span::before{content:'•';margin-right:8px;color:#aaa}.work-section{max-width:1440px;margin:auto;padding:0 var(--gutter) 72px}.work-grid{display:grid;grid-template-columns:minmax(0,774fr) minmax(0,506fr);gap:48px 32px}.case-card{position:relative;min-width:0;height:501px;overflow:hidden;border:1px solid #f3f3f3;border-radius:56px;background:#fefefe;box-shadow:1px 2px 2.5px #87878726,1px 14px 24px #6060600d;padding:48px}.case-card h2{position:relative;z-index:2;font-size:34px;line-height:1.37;font-weight:500;letter-spacing:.02em;white-space:nowrap}.case-card p{position:relative;z-index:2;max-width:355px;margin-top:15px;font-size:20px;line-height:1.5;color:var(--muted)}.case-card .text-link{position:absolute;left:48px;top:252px;z-index:3}.case-tags{position:absolute;left:48px;bottom:47px;z-index:2;font-size:20px;line-height:1.4;color:var(--caption);display:grid;gap:12px}.case-tags .metadata-row{justify-content:flex-start;gap:12px}.case-tags .metadata-row span+span::before{margin-right:12px}.forecast-card::before{content:'';position:absolute;width:557px;height:557px;left:430px;top:0;background:#eae2fd;border-radius:50%;filter:blur(110px)}.forecast-phone{position:absolute;width:355px;height:614px;left:371px;top:56px;max-width:none;object-fit:contain}.churn-art{position:absolute;width:388px;height:490px;left:136px;top:-4px;max-width:none}.churn-card::before{content:'';position:absolute;width:381px;height:388px;left:210px;top:40px;background:radial-gradient(ellipse at top left,#ffead7,#fbe1ee 51%,#faeffb);filter:blur(70px);opacity:.7;transform:rotate(58deg);border-radius:50%}.small-card{height:339px}.small-card .text-link,.small-card .progress-label{top:248px}.small-card .progress-label{position:absolute;left:48px;font-size:24px;color:#808080}.auto-card{background:linear-gradient(270deg,#fc5a0215,transparent),#fefefe}.auto-art{position:absolute;left:458px;top:50px;width:275px;height:241px;object-fit:contain;max-width:none}.how-section{width:100%;background:#f8f6f5;display:grid;place-items:center;min-height:614px}.how-section img{width:742px;max-width:100%;height:auto}.about-section{position:relative;width:100%;overflow:clip}.about-inner{max-width:1440px;margin:auto;padding:72px var(--gutter) 48px;min-height:0}.section-label{font-size:24px;line-height:1.2;color:var(--muted);font-weight:400}.about-grid{display:grid;grid-template-columns:minmax(0,720fr) minmax(0,556fr);gap:36px;margin-top:72px;position:relative}.about-copy h2{font-size:60px;line-height:1.1;font-weight:400;letter-spacing:0}.about-copy p{max-width:650px;font-size:26px;line-height:1.5;margin-top:32px}.about-copy p+p{margin-top:32px}.about-copy .personal{font-size:24px;line-height:1.4;color:var(--muted);margin-top:32px}.about-copy .text-link{margin-top:40px}.portrait{width:100%;aspect-ratio:556/706;border-radius:56px;object-fit:cover}.about-grid::before{content:'';position:absolute;width:450px;height:600px;right:-160px;top:60px;background:linear-gradient(#c9cdf850,#ecdaf244);filter:blur(65px);z-index:-1}.site-footer{padding-top:72px}
+.hero-intro-line{white-space:nowrap}
+.hero-photo-slot{display:inline-block;position:relative;width:.623656lh;height:1lh;margin-inline:.080645lh;vertical-align:top}
+.hero-photo-slot::after{content:'';position:absolute;left:50%;top:50%;width:max(100%,44px);height:max(100%,44px);transform:translate(-50%,-50%)}
+:root:not([data-theme="dark"]) .about-section{background:var(--color-bg-surface-subtle,#f8f6f5)}
+.hero-photo-slot img{position:absolute;left:calc(50% - .459677lh);top:-.010753lh;width:.919355lh;height:auto;max-width:none;transform-origin:50% 47%;transition:transform 480ms cubic-bezier(.2,.7,.2,1),filter 480ms cubic-bezier(.2,.7,.2,1);will-change:transform}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){.hero-photo-slot:is(:hover,:focus-visible) img{transform:translateY(-10px) scale(1.3) rotate(2.5deg);filter:drop-shadow(0 9px 8px rgba(25,25,30,.2))}}
+/* Independent drift leaves the existing entrance and hover transforms intact. */
+@media(prefers-reduced-motion:no-preference){
+  .hero-photo-slot img{animation:hero-photo-drift 9.2s ease-in-out infinite}
+  body[data-motion-paused="true"] .hero-photo-slot img{animation-play-state:paused}
+  body[data-motion-disabled="true"] .hero-photo-slot img{animation:none}
+}
+@keyframes hero-photo-drift{
+  0%,100%{translate:0 0;rotate:0deg}
+  25%{translate:.6px -1.8px;rotate:.45deg}
+  50%{translate:-.4px .7px;rotate:-.3deg}
+  75%{translate:-.7px -1px;rotate:-.5deg}
+}
+@media(width > 1100px){.hero{padding-top:36px}}
+@media(max-width:1100px){.hero-intro-line{white-space:normal}}
+@media(width > 1100px) and (width < 1440px){.case-card{padding:34px}.case-card h2{font-size:clamp(25px,2.36vw,34px)}.case-card p{font-size:18px;max-width:47%}.churn-card p,.more-card p{max-width:100%}.case-card .text-link,.small-card .progress-label{left:34px;font-size:21px}.case-tags{left:34px;font-size:17px}.forecast-phone{left:48%;width:46%;object-fit:contain}.auto-art{left:auto;right:4%;width:35%}.about-copy h2{font-size:48px}.about-copy p{font-size:23px}}
+/* Provisional responsive behavior; replace with supplied mobile frame specifications. */
+@media(max-width:1100px){.hero{padding-top:72px}.hero h1{font-size:clamp(35px,4.7vw,52px)}.hero-meta{font-size:18px}.work-grid{grid-template-columns:1fr 1fr;gap:24px}.case-card{padding:28px;height:580px;border-radius:32px}.case-card h2{font-size:26px;white-space:normal}.case-card p{font-size:17px;max-width:100%}.case-card .text-link{left:28px;top:240px;font-size:19px}.forecast-phone{top:290px;left:auto;right:0;width:215px;height:372px}.churn-art{top:200px;left:auto;right:-80px;width:300px;height:380px}.case-tags{left:28px;bottom:26px;font-size:14px;gap:8px}.case-tags .metadata-row{gap:8px}.forecast-card .case-tags{max-width:150px;line-height:1.6}.case-tags .metadata-row span+span::before{content:none}.small-card{height:370px}.small-card .text-link,.small-card .progress-label{top:auto;bottom:28px;left:28px;font-size:19px}.auto-art{width:160px;height:140px;left:auto;right:12px;top:auto;bottom:10px}.auto-card .progress-label{z-index:2}.how-section{min-height:450px}.how-section img{width:650px}.about-grid{grid-template-columns:1.1fr 1fr;gap:32px;margin-top:44px}.about-copy h2{font-size:38px}.about-copy p{font-size:20px;margin-top:24px}.about-copy .personal{font-size:18px}.about-inner{min-height:0}.portrait{border-radius:32px}.about-copy .text-link{font-size:20px}}
+@media(max-width:600px){.hero{padding-top:60px;padding-bottom:36px;text-align:left}.hero h1{font-size:36px;line-height:1.22;letter-spacing:-.02em}.hero h1 br{display:none}.hero-meta{font-size:15px;line-height:1.6;margin-top:24px}.metadata-row{justify-content:flex-start;gap:0 10px}.hero-meta .metadata-row span+span::before{content:none}.work-grid{grid-template-columns:1fr;gap:24px}.case-card{height:550px}.forecast-card{height:650px}.forecast-phone{top:275px;right:15px;width:235px;height:407px}.forecast-card .case-tags{max-width:140px;bottom:28px}.churn-art{top:190px;right:-50px}.case-card p{font-size:17px}.case-card .text-link{top:210px}.case-card h2{font-size:27px}.small-card{height:340px}.small-card .text-link{top:auto;bottom:28px}.auto-art{right:0;bottom:0}.how-section{min-height:390px;overflow:hidden}.how-section img{width:520px;max-width:none}.about-inner{padding-top:48px;padding-bottom:32px}.section-label{font-size:18px}.about-grid{grid-template-columns:1fr;margin-top:32px;gap:36px}.about-copy h2{font-size:36px}.about-copy p{font-size:18px}.about-copy .personal{font-size:17px}.about-copy .text-link{margin-top:28px}.portrait{max-height:550px;object-fit:cover}.site-footer{padding-top:52px}}@media(max-width:360px){.header-actions{gap:10px}.theme-orb{display:none}.case-card{padding:24px}.case-card h2{font-size:24px}.case-card .text-link{left:24px}.case-card p{font-size:16px}.hero h1{font-size:32px}}
+/* Match exported render bounds, including clipped phone and glow extents. */
+@media(width > 1100px){.forecast-phone{height:auto}.churn-art{width:369.53px;height:auto;top:0}.auto-art{width:282.42px;height:auto;left:450.43px;top:48.55px}.how-section{height:614px;min-height:614px;position:relative}.how-section img{position:absolute;width:657.2px;max-width:none;left:50%;top:50%;transform:translate(calc(-50% - 30px),-50%)}.about-copy p{margin-top:20px}.about-copy p+p{margin-top:32px}.about-copy .personal{margin-top:32px}.about-copy .text-link{margin-top:40px}}
+.auto-star{position:absolute;object-fit:contain;pointer-events:none}.auto-star-1{left:459px;top:273px;width:18px;height:18px}.auto-star-2{left:421px;top:233px;width:37px;height:37px}.auto-star-3{left:434px;top:270px;width:18px;height:18px}.auto-star-4{left:695px;top:91px;width:10px;height:10px}.auto-star-5{left:663px;top:268px;width:20px;height:20px}.auto-star-6{left:704px;top:72px;width:23px;height:23px}@media(max-width:1100px){.auto-star{display:none}}
+@media(width > 1100px) and (width < 1440px){.auto-art{left:auto;right:4%;width:35%;top:50px}.auto-star{display:none}}
+@media(max-width:1100px){.hero-meta .metadata-row span+span::before{content:none}}
+/* Centre the visible phone (source alpha bounds x102…533 of 533), not its file box.
+   The identical registration also applies to the animated chart canvas. */
+@media(max-width:600px){.forecast-phone{width:215px;height:auto;top:270px;left:50%;right:auto;transform:translateX(-59.57%)}.forecast-card .case-tags{max-width:100%;bottom:28px}.how-section img{width:calc((100vw - 40px)*1.247);max-width:none}}
+
+/* Source heading breaks apply to the full desktop composition only. */
+@media(width < 1440px){.about-copy h2 br{display:none}.about-copy h2,.case-card h2{text-wrap:balance}.case-card h2{white-space:normal}}
+/* Reposition the source artwork within the two-column intermediate cards. */
+@media(width > 600px) and (max-width:1100px){
+  .forecast-card::before{left:35%;top:10%;width:70%;height:72%;filter:blur(70px)}
+  .forecast-phone{top:auto;bottom:-26px;right:clamp(18px,3vw,32px);width:min(250px,52%);height:auto}
+  .forecast-card .case-tags{max-width:130px}
+  .forecast-card .case-tags .metadata-row span{white-space:normal}
+  .churn-art{top:105px;left:-5%;right:auto;width:min(388px,calc(100% - 12px));height:auto}
+}
+/* Keep the entire icon composition inside the single-column card. */
+@media(max-width:600px){.churn-art{left:auto;right:24px;top:190px;width:min(300px,85%);height:auto}}
+/* Reserve separator space so detecting wrapped lines cannot change wrapping. */
+.metadata-row,.case-tags .metadata-row{column-gap:24px}
+.metadata-row>span{position:relative}
+.metadata-row span+span{padding-left:0}
+.metadata-row span+span::before,
+.hero-meta .metadata-row span+span::before,
+.case-tags .metadata-row span+span::before{content:'•';position:absolute;left:-16px;margin:0;color:inherit}
+.metadata-row span.line-start{padding-left:0}
+.metadata-row span.line-start::before,
+.hero-meta .metadata-row span.line-start::before,
+.case-tags .metadata-row span.line-start::before{visibility:hidden}
+@media(width > 600px) and (max-width:700px){
+  .work-grid{grid-template-columns:1fr}
+  .case-card{height:501px}
+  .case-card p{max-width:355px}
+  .forecast-phone{width:250px}
+  .forecast-card .case-tags{max-width:none}
+  .churn-art{left:auto;right:10%;top:0;width:388px}
+  .small-card{height:339px}
+}
+/* Anchor clipped source assets to the card, including intermediate desktop widths. */
+.case-art-stage{display:contents}
+@media(width > 700px) and (max-width:1100px){
+  .forecast-card,.churn-card{height:700px}
+  .case-art-stage{display:block;position:absolute;left:28px;right:28px;top:308px;bottom:104px}
+  /* Center the visible artwork, compensating for transparent source-image margins. */
+  .forecast-phone{top:50%;bottom:auto;left:50%;right:auto;transform:translate(-59.57%,-50%);width:min(230px,95%);mask-image:linear-gradient(to bottom,#000 64%,rgba(0,0,0,.98) 70%,rgba(0,0,0,.88) 77%,rgba(0,0,0,.62) 84%,rgba(0,0,0,.3) 91%,rgba(0,0,0,.08) 97%,transparent 100%)}
+  .churn-art{top:50%;bottom:auto;left:50%;right:auto;transform:translate(-75.23%,-57.74%);width:480px;height:auto}
+  .forecast-card .case-tags,.churn-card .case-tags{left:28px;right:28px;bottom:26px;max-width:none;line-height:1.6}
+  .forecast-card .case-tags .metadata-row span{white-space:nowrap}
+}
+@media(max-width:1100px){
+  .forecast-card::before{left:auto;right:-5%;top:240px;width:75%;height:330px;filter:blur(70px)}
+  .churn-card::before{left:auto;right:-5%;top:250px;width:75%;height:300px;filter:blur(70px);transform:none}
+}
+@media(width > 700px) and (max-width:1100px){
+  .forecast-card::before,.churn-card::before{left:50%;right:auto;top:292px;width:90%;height:340px;transform:translateX(-50%)}
+}
+@media(width > 1100px){
+  .work-grid{container-type:inline-size}
+  .forecast-phone{top:auto;bottom:0}
+  .churn-art{left:auto;right:0;width:min(369.53px,calc((100cqw - 32px)*.2886953125));height:auto}
+}
+/* Preserve the desktop reference proportions as the two-card row narrows. */
+.portrait{align-self:start;height:auto;max-height:none;border-radius:0;object-fit:contain}
+@media(width > 1100px) and (width < 1440px){
+  .case-card:not(.small-card){height:calc((100cqw - 32px)*.39140625);padding:calc((100cqw - 32px)*.0375);border-radius:calc((100cqw - 32px)*.04375)}
+  .case-card:not(.small-card) h2{font-size:calc((100cqw - 32px)*.0265625)}
+  .case-card:not(.small-card) p{max-width:calc((100cqw - 32px)*.27734375);font-size:calc((100cqw - 32px)*.015625)}
+  .case-card:not(.small-card) .text-link{left:calc((100cqw - 32px)*.0375);top:calc((100cqw - 32px)*.196875);font-size:calc((100cqw - 32px)*.01875)}
+  .case-card:not(.small-card) .case-tags{left:calc((100cqw - 32px)*.0375);bottom:calc((100cqw - 32px)*.03671875);font-size:calc((100cqw - 32px)*.015625)}
+}
+
+/* Keep the source minimum height, but let translated copy determine the row height. */
+.small-card{height:auto;min-height:339px;display:flex;flex-direction:column}
+.small-card p{margin-bottom:24px}
+.small-card .progress-label{position:relative;inset:auto;margin-top:auto;align-self:flex-start;flex-shrink:0}
+.small-card .text-link{top:auto;bottom:48px}
+@media(max-width:1100px){.small-card .text-link{bottom:28px}}
+@media(width > 700px) and (max-width:1100px){.small-card{min-height:370px}}
+@media(max-width:600px){.small-card{min-height:340px}}
+
+/* Source corners scale with the desktop composition in both grid rows. */
+@media(width > 700px) and (max-width:1100px){.work-grid{container-type:inline-size}.case-card{border-radius:calc((100cqw - 24px)*.04375)}}
+@media(width > 1100px) and (width < 1440px){.case-card.small-card{border-radius:calc((100cqw - 32px)*.04375)}}
+@media(max-width:700px){.case-card{border-radius:24px}}
+
+/* Preserve the desktop portrait ratios (58/93 slot, 85.5/93 image), uniformly
+   scaled to the actual text line. An image must not enlarge just the first row. */
+.hero-role{white-space:nowrap}
+.hero-meta{display:grid;row-gap:0}
+.hero-meta .metadata-row{row-gap:0}
+@media(max-width:1100px){
+  .hero-intro-line{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;column-gap:.18em;row-gap:0}
+  .hero-person{display:inline-flex;align-items:center;column-gap:.18em;white-space:nowrap}
+  .hero h1 br{display:none}
+  .hero-description{display:block;margin-top:0;text-wrap:balance}
+  .hero-meta{line-height:calc(1.375em + 4px)}
+  .hero-meta .metadata-row>span{max-width:100%;white-space:normal;text-wrap:balance}
+}
+@media(max-width:600px){
+  .hero-intro-line{justify-content:flex-start;column-gap:.18em}
+  .hero-meta{line-height:calc(1.6em + 4px)}
+}
+
+/* The compact illustration needs its own space below translated copy. */
+@media(max-width:1100px){
+ .auto-card{padding-bottom:220px}
+ .auto-card .auto-art{bottom:64px}
+ .auto-card .progress-label{position:absolute;left:28px;bottom:28px;margin:0}
+}
+@media(max-width:360px){.auto-card .progress-label{left:24px}}
+
+/* Final metadata pass: readable against the existing pale card gradients. */
+:root:not([data-theme="dark"]) .case-tags{color:#666}
+
+#about[tabindex="-1"]:focus{outline:none}

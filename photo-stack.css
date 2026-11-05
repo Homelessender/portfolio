@@ -1,0 +1,33 @@
+/* Canonical deck. ?photos=single retains the original portrait control. */
+.has-photo-stack .about-grid::before{display:none}
+.has-photo-stack .about-grid>.corner-shell:has(>.portrait){display:none}
+.photo-stack{position:relative;width:100%;aspect-ratio:556/706;align-self:start;min-width:0;margin-left:-2.185%;isolation:isolate}
+/* The whole deck floats in a single plane, including during hover/focus.
+   Shuffle pauses the current pose without resetting it. */
+.photo-stack{--photo-float-rise:3px;animation:photo-stack-float 8s cubic-bezier(.45,0,.55,1) infinite;transform-origin:50% 50%;animation-play-state:paused}
+.photo-stack[data-float-visible="true"][data-phase="idle"][data-entry="done"]:not([data-page-hidden="true"]){animation-play-state:running}
+.photo-stack[data-entry="pending"]{opacity:0}
+[data-motion-paused="true"] .photo-stack{animation-play-state:paused!important}
+[data-motion-disabled="true"] .photo-stack{animation:none;translate:none;rotate:none;opacity:1;transform:none}
+@keyframes photo-stack-float{0%,100%{translate:0 calc(-1 * var(--photo-float-rise));rotate:-.18deg}50%{translate:0 var(--photo-float-rise);rotate:.18deg}}
+/* The near shadow falls on the next print; the broad outer shadow is preserved. */
+.photo-stack-print{position:absolute;left:0;top:0;max-width:none;transform-origin:0 0;user-select:none;pointer-events:none;will-change:transform;filter:drop-shadow(var(--photo-shadow-near-x,6px) var(--photo-shadow-near-y,4px) var(--photo-shadow-near-blur,9px) #00000024) drop-shadow(0 var(--photo-shadow-far-y,14px) var(--photo-shadow-far-blur,20px) #0000001a)}
+.photo-stack-face{position:relative;width:100%;height:100%;overflow:hidden}
+/* Preserve the photograph ratio while the slot changes its crop. */
+.photo-stack-image{position:absolute;top:50%;translate:0 -50%;display:block;width:100%;height:auto;max-width:none;user-select:none}
+.photo-stack-shadow{position:absolute;z-index:0;height:auto;max-width:none;pointer-events:none}
+.photo-stack-shadow-1{left:27.662%;top:-1.404%;width:104.436%}
+.photo-stack-shadow-2{left:26.658%;top:-3.448%;width:104.031%}
+.photo-stack-next{position:absolute;left:0;top:0;z-index:5;transform-origin:0 0;padding:0;background:transparent;border:0;cursor:pointer;touch-action:pan-y;-webkit-tap-highlight-color:transparent;color:white}
+.photo-stack-next:focus-visible{outline:3px solid #8798ff;outline-offset:6px;border-radius:8%}
+.photo-stack-hint{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);padding:10px 16px;border-radius:40px;background:#171717bb;font:500 14px/1.3 'Manrope',sans-serif;white-space:nowrap;opacity:0;transition:opacity 180ms;pointer-events:none}
+.photo-stack[data-hint-visible="true"] .photo-stack-hint{opacity:1}
+.photo-stack:not([data-phase="idle"]) .photo-stack-hint{opacity:0;transition:none}
+.photo-stack-status{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+@media(max-width:1100px){.photo-stack{width:88.5%;margin-left:0;justify-self:start}}
+@media(max-width:600px){.photo-stack{--photo-float-rise:2.5px;width:88.5%;margin-left:0;justify-self:start}.photo-stack-hint{bottom:14px;font-size:12px;padding:8px 12px}}
+@media(prefers-reduced-motion:reduce){.photo-stack{animation:none;translate:none;rotate:none;opacity:1;transform:none}.photo-stack-print{will-change:auto}.photo-stack-hint{transition:none}}
+
+/* The light raster shadow plates belong to the day source. Black shadows
+   between the actual prints remain in both themes. */
+:root[data-theme="dark"] .photo-stack-shadow{display:none}
