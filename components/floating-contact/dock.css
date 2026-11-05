@@ -1,0 +1,89 @@
+/* Component surfaces, not a backdrop illustration: colour comes from the page. */
+.floating-contact{
+  --dock-ink:#20232a;--dock-fill:rgb(255 255 255 / .09);--dock-menu-fill:rgb(255 255 255 / .3);
+  --dock-edge:rgb(255 255 255 / .44);--dock-top:rgb(255 255 255 / .88);--dock-low:rgb(78 72 90 / .15);
+  --dock-core:#22252d;--dock-core-ink:#fff;
+  position:fixed;z-index:60;right:max(24px,env(safe-area-inset-right));bottom:max(24px,env(safe-area-inset-bottom));
+  display:flex;align-items:center;gap:8px;isolation:isolate;transform-origin:100% 100%;color:var(--dock-ink);font-family:inherit;
+}
+.floating-contact[hidden]{display:none}
+.dock-surface{
+  /* The continuous masked highlight below owns the visible edge.
+     Differently coloured border sides create hard joins on rounded buttons. */
+  border:1px solid transparent;
+  background:var(--dock-fill);backdrop-filter:blur(4px) saturate(1.18);-webkit-backdrop-filter:blur(4px) saturate(1.18);
+  box-shadow:inset 0 1px 1px rgb(255 255 255 / .38),inset 0 -1px 1px rgb(52 45 68 / .035),0 4px 14px rgb(25 20 38 / .085);
+}
+.dock-home,.dock-trigger{height:56px;min-height:56px;box-sizing:border-box;border-radius:999px;color:inherit;display:inline-flex;align-items:center;justify-content:center;text-decoration:none!important;cursor:pointer;touch-action:manipulation;}
+.dock-home{width:56px;flex:0 0 56px;position:relative}
+.dock-home[hidden]{display:none}
+.dock-trigger{min-width:176px;gap:16px;justify-content:space-between;padding:7px 7px 7px 20px;font:500 16px/1.4 Manrope,Arial,sans-serif;letter-spacing:0;white-space:nowrap;}
+.dock-core{width:40px;height:40px;flex:0 0 40px;border-radius:50%;background:var(--dock-core);color:var(--dock-core-ink);display:grid;place-items:center;box-shadow:inset 0 1px 1px rgb(255 255 255 / .14),0 1px 3px rgb(0 0 0 / .12)}
+.dock-icon{display:inline-block;width:20px;height:20px;flex:0 0 20px;background:currentColor;mask:var(--dock-icon) center/contain no-repeat;-webkit-mask:var(--dock-icon) center/contain no-repeat;pointer-events:none}
+.dock-home>.dock-icon{width:22px;height:22px}
+.dock-home-label{position:absolute;bottom:calc(100% + 9px);padding:5px 9px;border-radius:8px;background:var(--dock-core);color:var(--dock-core-ink);font:500 12px/1.4 Manrope,Arial,sans-serif;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity 120ms}
+.dock-home:is(:hover,:focus-visible) .dock-home-label{opacity:1}
+.dock-panel{position:absolute;right:0;bottom:calc(100% + 12px);width:232px;max-width:calc(100vw - 40px);padding:8px;border-radius:24px;background:var(--dock-menu-fill);backdrop-filter:blur(12px) saturate(1.18);-webkit-backdrop-filter:blur(12px) saturate(1.18);transform-origin:90% 100%;}
+.dock-panel[hidden]{display:none}
+.dock-item{height:48px;min-height:48px;box-sizing:border-box;width:100%;border:0;background:transparent;color:inherit;border-radius:16px;display:flex;align-items:center;gap:14px;padding:0 14px;text-align:left;text-decoration:none!important;font:500 16px/1.4 Manrope,Arial,sans-serif;cursor:pointer;white-space:nowrap;}
+.dock-item-label{flex:1}
+.dock-item>.dock-external{width:16px;height:16px;flex-basis:16px;opacity:.8}
+.dock-item+.dock-item{position:relative}
+.dock-item+.dock-item::before{content:"";position:absolute;height:1px;left:14px;right:14px;top:0;background:rgb(255 255 255 / .46);pointer-events:none}
+.dock-feedback{position:absolute;right:0;bottom:calc(100% + 16px);max-width:calc(100vw - 40px);font:500 13px/1.4 Manrope,Arial,sans-serif;pointer-events:none;white-space:nowrap}
+.dock-feedback:empty{display:none}
+.floating-contact[data-open=true] .dock-feedback{bottom:calc(100% + 196px)}
+.dock-panel .dock-feedback{position:static;display:block;max-width:100%;padding:12px 14px;white-space:normal;overflow-wrap:anywhere}
+.floating-contact :is(a,button):focus-visible{outline:2px solid #6574cf;outline-offset:4px}
+.floating-contact button:focus:not(:focus-visible){outline:none}
+@media(hover:hover){.dock-home,.dock-trigger,.dock-core,.dock-item{transition:background-color 180ms,box-shadow 180ms}.dock-home:hover,.dock-trigger:hover{background:rgb(255 255 255 / .19);box-shadow:inset 0 1px 1px rgb(255 255 255 / .6),0 6px 16px rgb(25 20 38 / .11)}.dock-trigger:hover .dock-core{background:#30343d}.dock-item:hover{background:rgb(255 255 255 / .28)}}
+.dock-home:active,.dock-trigger:active{box-shadow:inset 0 1px 3px rgb(30 25 45 / .13),0 2px 7px rgb(25 20 38 / .06)}
+:root[data-theme=dark] .floating-contact{--dock-ink:#f3f3f5;--dock-fill:rgb(20 23 31 / .64);--dock-menu-fill:rgb(20 23 31 / .68);--dock-edge:rgb(255 255 255 / .13);--dock-top:rgb(255 255 255 / .38);--dock-low:rgb(0 0 0 / .38);--dock-core:#23262f}
+:root[data-theme=dark] .dock-item+.dock-item::before{background:rgb(255 255 255 / .1)}
+:root[data-theme=dark] .dock-core{box-shadow:inset 0 0 0 1px rgb(255 255 255 / .13),0 1px 3px rgb(0 0 0 / .18)}
+@media(hover:hover){:root[data-theme=dark] .dock-home:hover,:root[data-theme=dark] .dock-trigger:hover{background:rgb(20 23 31 / .72)}:root[data-theme=dark] .dock-item:hover{background:rgb(255 255 255 / .09)}}
+:root[data-dock-material=source] .floating-contact{--dock-fill:rgb(240 240 240 / .2)}
+@media(max-width:600px){.floating-contact{right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom))}.dock-panel{max-width:calc(100vw - 32px)}}
+@media(max-height:420px){.dock-panel{max-height:calc(100dvh - 96px);overflow-y:auto}}
+@media(prefers-reduced-motion:reduce){.floating-contact *{animation:none!important;transition:none!important}}
+@media(forced-colors:active){.dock-surface,.dock-core{background:Canvas;color:CanvasText;border:1px solid CanvasText;backdrop-filter:none}.dock-item+.dock-item::before{background:CanvasText}}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.dock-surface{background:#fbf8f4}:root[data-theme=dark] .dock-surface{background:#20232b}}
+
+/* Glass revision: clear optical edge and separate, adaptive foreground contrast. */
+.dock-surface{position:relative;--dock-fill:rgb(255 255 255 / .68);background:var(--dock-fill);backdrop-filter:blur(2.2px) saturate(1.12);-webkit-backdrop-filter:blur(2.2px) saturate(1.12)}
+.dock-panel{position:absolute}
+.dock-surface[data-optics=refractive]{backdrop-filter:var(--dock-lens) blur(1.4px) saturate(1.12)}
+.dock-surface::after{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1.2px;pointer-events:none;background:radial-gradient(ellipse at var(--dock-glass-x,25%) var(--dock-glass-y,0%),rgb(255 255 255 / .95),rgb(255 255 255 / .07) 62%),linear-gradient(135deg,rgb(255 255 255 / .88),rgb(255 255 255 / .08) 44%,rgb(42 37 54 / .2) 76%,rgb(255 255 255 / .5));mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude;-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;}
+.dock-surface[data-backdrop=light]{--dock-fill:rgb(255 255 255 / .16);color:#20232a;background:var(--dock-fill)}
+.dock-surface[data-backdrop=dark]{--dock-fill:rgb(14 17 27 / .28);color:#fff;background:var(--dock-fill)}
+.dock-surface[data-backdrop=mixed]{--dock-fill:rgb(255 255 255 / .72);color:#20232a;background:var(--dock-fill)}
+.dock-label{position:relative;z-index:1;text-shadow:0 1px 1px rgb(255 255 255 / .16)}
+[data-backdrop=dark]>.dock-label{text-shadow:0 1px 3px rgb(0 0 0 / .3)}
+.dock-panel[data-backdrop=light],.dock-panel[data-backdrop=mixed]{background:rgb(255 255 255 / .82)}
+.dock-panel[data-backdrop=dark]{background:rgb(20 23 31 / .82)}
+.dock-panel[data-optics=refractive]{backdrop-filter:var(--dock-lens) blur(12px) saturate(1.08)}
+.dock-panel[data-backdrop=dark] .dock-item+.dock-item::before{background:rgb(255 255 255 / .12)}
+.dock-home>.dock-icon{transition:transform 220ms cubic-bezier(.2,.7,.25,1),background-color 180ms}
+.dock-home-label{transition:opacity 120ms 140ms}
+.dock-home:focus-visible{background:#191b20!important;color:#fff!important}
+.dock-home:focus-visible>.dock-icon{transform:translateY(-1px) scale(1.08)}
+@media(hover:hover){
+  .dock-trigger[data-backdrop]:hover{background:var(--dock-fill)}
+  :root[data-theme=dark] .dock-trigger[data-backdrop]:hover{background:var(--dock-fill)}
+  .dock-home.dock-surface:hover,:root[data-theme=dark] .dock-home.dock-surface:hover{background:#191b20;color:#fff;box-shadow:inset 0 1px 1px rgb(255 255 255 / .24),0 5px 15px rgb(20 20 28 / .16)}
+  .dock-home:hover>.dock-icon{transform:translateY(-1px) scale(1.08)}
+  .dock-panel[data-backdrop=dark] .dock-item:hover{background:rgb(255 255 255 / .1)}
+  .dock-panel[data-backdrop=light] .dock-item:hover,.dock-panel[data-backdrop=mixed] .dock-item:hover{background:rgb(255 255 255 / .38)}
+}
+@media(forced-colors:active){
+  .dock-surface[data-backdrop]{background:Canvas!important;color:CanvasText!important;backdrop-filter:none!important}
+  .dock-surface::after{display:none}
+}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.dock-surface[data-backdrop]{background:#fbf8f4!important;color:#20232a!important}}
+:root[data-theme=dark] .dock-surface:not([data-backdrop]){background:rgb(20 23 31 / .78);color:#fff}
+.dock-home[data-backdrop=dark]>.dock-icon{filter:drop-shadow(0 1px 1px rgb(0 0 0 / .35))}
+@media(prefers-reduced-motion:reduce){.dock-home>.dock-icon{transform:none!important}}
+
+@property --dock-glass-x{syntax:"<percentage>";inherits:true;initial-value:25%}
+@property --dock-glass-y{syntax:"<percentage>";inherits:true;initial-value:0%}
+.dock-home,.dock-trigger{transition:background-color 180ms,color 140ms,box-shadow 180ms}
