@@ -141,3 +141,6 @@ body{background:linear-gradient(131.662deg,#fbf8f4 0%,#f3f4f9 84.989%)}.home-mai
 :root:not([data-theme="dark"]) .case-tags{color:#666}
 
 #about[tabindex="-1"]:focus{outline:none}
+
+/* Keep the normal arrow over animated hero letters. */
+#hero-title,#hero-title *{cursor:default}
