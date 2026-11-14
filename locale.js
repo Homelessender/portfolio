@@ -6,7 +6,7 @@
   let saved;
   try { saved = localStorage.getItem('portfolio-language'); } catch {}
   const requested = address.searchParams.get('lang');
-  let language = valid(requested) ? requested : valid(saved) ? saved : 'en';
+  let language = valid(requested) ? requested : address.pathname.startsWith('/ru/') ? 'ru' : valid(saved) ? saved : 'en';
   // The original history entry may have no lang parameter. Its language must
   // survive later preference writes when Back returns to that same document.
   const initialLanguage = language;
@@ -110,6 +110,9 @@
   }
   function localLink(href, lang = language) {
     const url = new URL(href, location.href);
+    if (['/', '/index.html', '/ru/', '/ru/index.html'].includes(url.pathname)) url.pathname = lang === 'ru' ? '/ru/' : '/';
+    const casePath = url.pathname.replace(/^\/ru(?=\/cases\/)/, '');
+    if (/^\/cases\/(monthly-forecast|reducing-churn)\/(?:index\.html)?$/.test(casePath)) url.pathname = (lang === 'ru' ? '/ru' : '') + casePath;
     url.searchParams.set('lang', lang);
     return url.pathname + url.search + url.hash;
   }
@@ -218,7 +221,7 @@
       language=next;root.lang=next;root.dataset.language=next;
       window.PortfolioLocale.language=next;
       try{localStorage.setItem('portfolio-language',next);}catch{}
-      const url=new URL(location.href);url.searchParams.set('lang',next);
+      const url=new URL(localLink(location.href,next),location.href);
       if(push)history.pushState(null,'',url);
       render();
       document.dispatchEvent(new Event('portfolio:locale-changed'));
